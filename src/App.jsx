@@ -6,6 +6,7 @@
 
 import { useState, useEffect } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
+import { SpeedInsights } from '@vercel/speed-insights/react'
 import { loadModel } from './utils/model'
 import { ModelContext } from './context/ModelContext'
 
@@ -139,6 +140,9 @@ function App() {
 
         {/* ── Padding for Mobile Nav ── */}
         <div className="h-20 md:hidden" />
+
+        {/* ── Vercel Speed Insights ── */}
+        <SpeedInsights />
       </div>
     </ModelContext.Provider>
   )
