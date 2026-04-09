@@ -142,7 +142,7 @@ function App() {
         <div className="h-20 md:hidden" />
 
         {/* ── Vercel Speed Insights ── */}
-        <SpeedInsights />
+        <SpeedInsights route={location.pathname} />
       </div>
     </ModelContext.Provider>
   )
