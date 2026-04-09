@@ -14,7 +14,7 @@ import HasilKartu from '../components/HasilKartu'
 
 function DeteksiPage({ modelReady }) {
   const [previewURL, setPreviewURL] = useState(null)
-  const [loading, setLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   const [hasil, setHasil] = useState(null)
   const [error, setError] = useState(null)
   const [savedInfo, setSavedInfo] = useState(null)
@@ -41,24 +41,25 @@ function DeteksiPage({ modelReady }) {
 
   /**
    * Handler utama analisis gambar
-   * Alur: validasi → prediksi TF.js → kompresi canvas → auto-save IndexedDB → tampil hasil
-   * ⚠️ TIDAK DIUBAH — logika TFJS (tf.tidy) dan IndexedDB tetap identik
+   * Alur: validasi → loading → jeda UI → prediksi TF.js → simpan → tampil hasil
    */
   const handleAnalisis = useCallback(async () => {
     if (!imgRef.current || !modelReady) return
 
-    setLoading(true)
+    setIsLoading(true)
     setError(null)
     setHasil(null)
     setSavedInfo(null)
 
+    // KOMENTAR PENTING: Jeda 50ms untuk memberikan waktu bagi browser me-render 
+    // animasi loading sebelum UI thread diblokir oleh komputasi berat TensorFlow CPU.
+    await new Promise(resolve => setTimeout(resolve, 50))
+
     try {
-      console.log('[SiDaun] Memulai prediksi...')
+      console.log('[SiDaun] Memulai prediksi (CPU Backend)...')
       const prediksi = await predict(imgRef.current)
       console.log('[SiDaun] Prediksi selesai:', prediksi.kelas, `${(prediksi.akurasi * 100).toFixed(1)}%`)
 
-      // KOMENTAR EDUKASI: Fungsi ini menurunkan ukuran gambar memakai Canvas HTML
-      // Mengurangi resolusi ke 500px & kualitas JPEG 60% agar file tidak menumpuk dan memberatkan database (IndexedDB).
       const imageBase64 = kompresGambar(imgRef.current, 500, 0.6)
 
       const savedId = await simpanRiwayat({
@@ -77,7 +78,7 @@ function DeteksiPage({ modelReady }) {
       console.error('[SiDaun] Error saat prediksi:', err)
       setError('Gagal menganalisis gambar. Pastikan gambar valid dan coba lagi.')
     } finally {
-      setLoading(false)
+      setIsLoading(false)
     }
   }, [modelReady])
 
@@ -161,7 +162,7 @@ function DeteksiPage({ modelReady }) {
                     crossOrigin="anonymous"
                   />
                 </div>
-                {!loading && (
+                {!isLoading && (
                   <button
                     onClick={handleReset}
                     className="absolute top-2 right-2 flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold transition-all hover:scale-105"
@@ -195,21 +196,21 @@ function DeteksiPage({ modelReady }) {
             )}
 
             {/* Input Hidden */}
-            <input ref={kameraRef} id="input-kamera" type="file" accept="image/*" capture="environment" onChange={handleFileChange} className="hidden" disabled={loading} />
-            <input ref={galeriRef} id="input-galeri" type="file" accept="image/*" onChange={handleFileChange} className="hidden" disabled={loading} />
+            <input ref={kameraRef} id="input-kamera" type="file" accept="image/*" capture="environment" onChange={handleFileChange} className="hidden" disabled={isLoading} />
+            <input ref={galeriRef} id="input-galeri" type="file" accept="image/*" onChange={handleFileChange} className="hidden" disabled={isLoading} />
 
             {/* Tombol Kamera & Galeri */}
             <div className="grid grid-cols-2 gap-3">
               <button
                 id="btn-kamera"
                 onClick={() => kameraRef.current?.click()}
-                disabled={loading}
+                disabled={isLoading}
                 className="flex flex-col items-center gap-2 py-5 rounded-2xl transition-all duration-200 active:scale-95 hover:-translate-y-0.5"
                 style={{
                   background: 'linear-gradient(135deg, #f0fdf4, #dcfce7)',
                   border: '1.5px solid rgba(52, 211, 153, 0.4)',
-                  cursor: loading ? 'not-allowed' : 'pointer',
-                  opacity: loading ? 0.5 : 1,
+                  cursor: isLoading ? 'not-allowed' : 'pointer',
+                  opacity: isLoading ? 0.5 : 1,
                 }}
               >
                 <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ background: 'rgba(16,185,129,0.12)' }}>
@@ -221,13 +222,13 @@ function DeteksiPage({ modelReady }) {
               <button
                 id="btn-galeri"
                 onClick={() => galeriRef.current?.click()}
-                disabled={loading}
+                disabled={isLoading}
                 className="flex flex-col items-center gap-2 py-5 rounded-2xl transition-all duration-200 active:scale-95 hover:-translate-y-0.5"
                 style={{
                   background: 'linear-gradient(135deg, #f0fdf4, #dcfce7)',
                   border: '1.5px solid rgba(52, 211, 153, 0.4)',
-                  cursor: loading ? 'not-allowed' : 'pointer',
-                  opacity: loading ? 0.5 : 1,
+                  cursor: isLoading ? 'not-allowed' : 'pointer',
+                  opacity: isLoading ? 0.5 : 1,
                 }}
               >
                 <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ background: 'rgba(16,185,129,0.12)' }}>
@@ -266,14 +267,16 @@ function DeteksiPage({ modelReady }) {
             {/* Tombol Analisis */}
             <button
               id="btn-analisis"
-              className="btn-primary w-full"
+              className={`btn-primary w-full transition-all duration-300 ${
+                isLoading ? 'bg-slate-400 cursor-not-allowed opacity-80' : ''
+              }`}
               onClick={handleAnalisis}
-              disabled={!previewURL || loading || !modelReady}
+              disabled={!previewURL || isLoading || !modelReady}
             >
-              {loading ? (
+              {isLoading ? (
                 <>
                   <Loader2 size={18} className="animate-spin" />
-                  Menganalisis…
+                  Menganalisis Daun…
                 </>
               ) : (
                 <>
@@ -304,7 +307,7 @@ function DeteksiPage({ modelReady }) {
           )}
 
           {/* Loading State */}
-          {loading && (
+          {isLoading && (
             <div className="container-hijau-pekat p-8 flex flex-col items-center gap-4 animate-fade-in">
               <div
                 className="w-16 h-16 rounded-2xl flex items-center justify-center animate-pulse"
@@ -320,7 +323,7 @@ function DeteksiPage({ modelReady }) {
           )}
 
           {/* Kartu Hasil */}
-          {hasil && !loading && (
+          {hasil && !isLoading && (
             <div className="animate-slide-up">
               <HasilKartu hasil={hasil} />
             </div>

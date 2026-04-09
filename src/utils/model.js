@@ -54,6 +54,17 @@ export async function loadModel() {
 
   console.log('[SiDaun] Memuat model TF.js dari /model/model.json ...')
 
+  // 1. FORCE CPU BACKEND (Perbaikan untuk HP dengan WebGL Driver Bermasalah)
+  // Memaksa TFJS menggunakan CPU untuk menghindari bug presisi (index 0) pada GPU HP tertentu.
+  try {
+    console.log('[SiDaun] Mengatur backend ke CPU untuk stabilitas...');
+    await tf.setBackend('cpu');
+    await tf.ready();
+    console.log('[SiDaun] Backend aktif:', tf.getBackend());
+  } catch (backendErr) {
+    console.warn('[SiDaun] Gagal memaksa backend CPU, menggunakan default.', backendErr);
+  }
+
   try {
     // KOMENTAR EDUKASI: Fungsi ini memuat model CNN (Convolutional Neural Network) 
     // dari format file json dan bobot (bin) yang diterjemahkan agar bisa dijalankan di browser.
@@ -68,7 +79,7 @@ export async function loadModel() {
     console.log('[SiDaun] Loaded sebagai LayersModel.')
   }
 
-  // Warm-up prediksi agar ter-compile di GPU/WASM dan tidak lag saat pertama kali prediksi
+  // Warm-up prediksi agar ter-compile dan tidak lag saat pertama kali prediksi
   const dummyInput = tf.zeros([1, 224, 224, 3])
   const warmupResult = modelInstance.predict(dummyInput)
   if (Array.isArray(warmupResult)) {
@@ -93,36 +104,40 @@ export async function predict(imageElement) {
     throw new Error('Model belum di-load. Panggil loadModel() terlebih dahulu.')
   }
 
-  // KOMENTAR EDUKASI: tf.tidy() mencegah memory leak di browser dengan 
-  // membersihkan otomatis (dispose) memori/tensor perantara setelah perhitungan selesai.
-  const outputTensor = tf.tidy(() => {
-    // KOMENTAR EDUKASI: Ini untuk konversi gambar biasa dari elemen HTML 
-    // menjadi tensor/matriks angka yang bisa dipahami model AI.
-    const rawTensor = tf.browser.fromPixels(imageElement)
+  // 1. OFF-SCREEN CANVAS RESIZING (Solusi untuk Performa & Memory)
+  // Sangat penting terutama saat menggunakan backend CPU agar tidak memproses gambar 4K.
+  const canvas = document.createElement('canvas')
+  canvas.width = 224
+  canvas.height = 224
+  const ctx = canvas.getContext('2d')
 
-    // KOMENTAR EDUKASI: Resolusi gambar diubah (resize) paksa menjadi 224x224 piksel
-    // karena bentuk layer input MobileNetV2 saat di-training berukuran 224x224.
-    const resized = rawTensor.resizeBilinear([224, 224])
+  // Gambar ulang dan kecilkan gambar asli ke 224x224
+  ctx.drawImage(imageElement, 0, 0, 224, 224)
 
-    const floated = resized.toFloat()
+  // 2. TFJS PREDICTION (Memory Management via tf.tidy)
+  const scoresArray = tf.tidy(() => {
+    // Gunakan elemen CANVAS yang sudah berukuran kecil sebagai input
+    const rawTensor = tf.browser.fromPixels(canvas)
+
+    // Langsung konversi ke float (sudah 224x224)
+    const floated = rawTensor.toFloat()
     
     // Normalisasi warna dari rentang 255 RGB ke [-1, 1]
     const normalized = floated.sub(tf.scalar(127.5)).div(tf.scalar(127.5))
 
-    // Tambahkan 1 dimensi array kosong sebagai batch size tensor -> [1, 224, 224, 3]
+    // Tambahkan dimensi batch -> [1, 224, 224, 3]
     const batched = normalized.expandDims(0)
 
-    const output = modelInstance.predict(batched)
+    let output = modelInstance.predict(batched)
 
+    // Jika output berupa object (biasanya pada GraphModel), ambil tensor pertamanya
     if (output && typeof output === 'object' && !output.shape) {
-      return Object.values(output)[0]
+      output = Object.values(output)[0]
     }
-    return output
-  })
 
-  // Sinkronisasi ambil data tensor menjadi array nilai probabilitas (0 - 1)
-  const scoresArray = Array.from(outputTensor.softmax().dataSync())
-  outputTensor.dispose()
+    // Ambil data probabilitas (softmax) dan konversi ke array JS
+    return Array.from(output.softmax().dataSync())
+  })
 
   const indexMax = scoresArray.indexOf(Math.max(...scoresArray))
   const kelasHasil = LABELS[indexMax]
