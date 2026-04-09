@@ -69,15 +69,15 @@ cd sidaun
 ```bash
 npm install
 ```
-
-### 3. Jalankan Mode Pengembangan
-```bash
-npm run dev
-```
 Atau
 ```bash
 npm install --legacy-peer-deps
 ```
+### 3. Jalankan Mode Pengembangan
+```bash
+npm run dev
+```
+
 Buka `http://localhost:5173` di browser Anda untuk melihat hasilnya secara real-time.
 
 ### 4. Build untuk Produksi (Menguji PWA & Offline Mode)
