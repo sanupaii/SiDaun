@@ -9,7 +9,7 @@ Proyek ini dikembangkan sebagai bagian dari penelitian skripsi berjudul:
 
 ## 🌐 Live Demo
 Aplikasi ini sudah dapat diakses dan diinstal (PWA) secara langsung melalui tautan berikut:
-👉 **[Kunjungi Aplikasi SiDaun](https://masukkan-link-hosting-kamu-disini.vercel.app)** *(Catatan: Buka melalui browser Chrome/Safari di HP untuk mengaktifkan fitur Install to Home Screen).*
+👉 **[Kunjungi Aplikasi SiDaun](https://si-daun.vercel.app)** *(Catatan: Buka melalui browser Chrome/Safari di HP untuk mengaktifkan fitur Install to Home Screen).*
 
 ---
 
