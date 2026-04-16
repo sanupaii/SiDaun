@@ -183,7 +183,12 @@ html {
 
 body {
   font-family: 'Inter', system-ui, sans-serif;
-  background-color: #f8fafc;
+  /* Background gambar utama dari folder public */
+  background-color: #0d2218;
+  background-image: url('/bg.jpg');
+  background-size: cover;
+  background-position: center top;
+  background-attachment: fixed;
   color: #0f172a;
   min-height: 100vh;
   overflow-x: hidden;
@@ -418,29 +423,33 @@ body {
    menciptakan efek cahaya lembut berwarna yang organik.
    ──────────────────────────────────────────────────────────────── */
 .mesh-gradient-bg {
-  background-color: #f0fdf4;
+  /* Overlay frosted semi-transparan di atas bg.jpg (dari body)
+     Mempertahankan keterbacaan teks gelap & warna neon emerald yang sudah ada */
+  background-color: transparent;
   background-image:
+    /* Lapisan putih-hijau tipis agar teks dark tetap terbaca di atas foto */
+    linear-gradient(to bottom, rgba(240, 253, 244, 0.82) 0%, rgba(236, 253, 245, 0.78) 100%),
     /* Blob hijau emerald — kanan atas */
-    radial-gradient(ellipse 70% 55% at 85% 10%, rgba(52, 211, 153, 0.35) 0%, transparent 60%),
+    radial-gradient(ellipse 70% 55% at 85% 10%, rgba(52, 211, 153, 0.30) 0%, transparent 60%),
     /* Blob hijau gelap — kiri bawah */
-    radial-gradient(ellipse 60% 50% at 10% 90%, rgba(16, 185, 129, 0.28) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 10% 90%, rgba(16, 185, 129, 0.25) 0%, transparent 60%),
     /* Blob biru langit — kiri atas */
-    radial-gradient(ellipse 55% 45% at 5% 15%, rgba(125, 211, 252, 0.22) 0%, transparent 55%),
+    radial-gradient(ellipse 55% 45% at 5% 15%, rgba(125, 211, 252, 0.15) 0%, transparent 55%),
     /* Blob indigo — kanan bawah */
-    radial-gradient(ellipse 50% 40% at 90% 85%, rgba(165, 180, 252, 0.18) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 40% at 90% 85%, rgba(165, 180, 252, 0.12) 0%, transparent 55%),
     /* Blob kuning hangat — tengah */
-    radial-gradient(ellipse 45% 35% at 50% 55%, rgba(250, 240, 137, 0.12) 0%, transparent 50%);
+    radial-gradient(ellipse 45% 35% at 50% 55%, rgba(250, 240, 137, 0.08) 0%, transparent 50%);
   min-height: 100vh;
 }
 
-/* Hero page: mesh-gradient + spot terang di tengah atas */
+/* Hero page: overlay neon di atas bg.jpg */
 .hero-gradient {
-  background-color: #ecfdf5;
+  background-color: transparent;
   background-image:
-    radial-gradient(ellipse 80% 55% at 50% -5%, rgba(52, 211, 153, 0.4) 0%, transparent 65%),
-    radial-gradient(ellipse 60% 45% at 85% 30%, rgba(125, 211, 252, 0.2) 0%, transparent 55%),
-    radial-gradient(ellipse 55% 40% at 10% 70%, rgba(16, 185, 129, 0.25) 0%, transparent 55%),
-    radial-gradient(ellipse 40% 35% at 80% 90%, rgba(165, 180, 252, 0.15) 0%, transparent 50%);
+    radial-gradient(ellipse 80% 55% at 50% -5%, rgba(52, 211, 153, 0.35) 0%, transparent 65%),
+    radial-gradient(ellipse 60% 45% at 85% 30%, rgba(125, 211, 252, 0.18) 0%, transparent 55%),
+    radial-gradient(ellipse 55% 40% at 10% 70%, rgba(16, 185, 129, 0.22) 0%, transparent 55%),
+    radial-gradient(ellipse 40% 35% at 80% 90%, rgba(165, 180, 252, 0.12) 0%, transparent 50%);
 }
 
 /* =========================================
