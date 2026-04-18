@@ -135,8 +135,12 @@ export async function predict(imageElement) {
       output = Object.values(output)[0]
     }
 
-    // Ambil data probabilitas (softmax) dan konversi ke array JS
-    return Array.from(output.softmax().dataSync())
+    // CATATAN PENTING: Model baru ini sudah memiliki layer Softmax di dalam arsitekturnya
+    // (node 'dense_1/Softmax' pada model.json). Memanggil .softmax() lagi di sini
+    // akan menyebabkan "double softmax" yang meratakan distribusi probabilitas
+    // dan membuat confidence terlihat jauh lebih rendah dari nilai aslinya.
+    // Cukup ambil output langsung tanpa softmax tambahan.
+    return Array.from(output.dataSync())
   })
 
   const indexMax = scoresArray.indexOf(Math.max(...scoresArray))

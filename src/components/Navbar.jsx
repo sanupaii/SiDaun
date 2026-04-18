@@ -8,11 +8,11 @@ import { NavLink, useLocation } from 'react-router-dom'
 import { Home, Leaf, History, Info, BookOpen } from 'lucide-react'
 
 const navItems = [
-  { to: '/',        label: 'Home',    Icon: Home    },
-  { to: '/deteksi', label: 'Deteksi', Icon: Leaf    },
-  { to: '/edukasi', label: 'Edukasi', Icon: BookOpen},
+  { to: '/', label: 'Home', Icon: Home },
+  { to: '/deteksi', label: 'Deteksi', Icon: Leaf },
+  { to: '/edukasi', label: 'Edukasi', Icon: BookOpen },
   { to: '/riwayat', label: 'Riwayat', Icon: History },
-  { to: '/about',   label: 'About',   Icon: Info    },
+  { to: '/about', label: 'About', Icon: Info },
 ]
 
 function Navbar() {

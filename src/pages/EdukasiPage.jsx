@@ -78,7 +78,7 @@ export default function EdukasiPage() {
   if (selected) {
     return (
       <div className="w-full max-w-4xl mx-auto px-4 py-8 pb-28 md:pb-12 flex flex-col gap-6 animate-fade-in relative z-10">
-        <button 
+        <button
           onClick={() => navigate(-1)} // Navigasi Histori (-1)
           className="flex items-center gap-2 text-slate-500 hover:text-emerald-600 transition-colors font-medium w-fit mb-2 group"
         >
@@ -87,65 +87,65 @@ export default function EdukasiPage() {
         </button>
 
         {/* Efek Border Neon/Highlight via custom style & ring animation */}
-        <div 
+        <div
           className="rounded-3xl p-6 md:p-10 transition-all duration-300 bg-white/60 backdrop-blur-md border-[2px] shadow-2xl animate-scale-in"
           style={{ borderColor: selected.color, boxShadow: `0 0 40px ${selected.color}30` }}
         >
-            <div className="flex items-center gap-4 mb-6">
-              <div className="p-3.5 rounded-2xl border" style={{ background: selected.bgBadge, borderColor: `${selected.color}30` }}>
-                <selected.icon size={26} color={selected.color} strokeWidth={2.5} />
-              </div>
-              <h2 className="text-2xl md:text-3xl font-black text-slate-800 tracking-tight">{selected.nama}</h2>
+          <div className="flex items-center gap-4 mb-6">
+            <div className="p-3.5 rounded-2xl border" style={{ background: selected.bgBadge, borderColor: `${selected.color}30` }}>
+              <selected.icon size={26} color={selected.color} strokeWidth={2.5} />
             </div>
-            
-            <p className="text-base font-medium text-slate-600 mb-8 italic leading-relaxed border-l-4 pl-4 border-emerald-400">
-              "{selected.deskripsi_singkat}"
-            </p>
+            <h2 className="text-2xl md:text-3xl font-black text-slate-800 tracking-tight">{selected.nama}</h2>
+          </div>
 
-            {/* Reference Image Focus */}
-            <div className="mb-10 flex flex-col items-center justify-center p-6 md:p-8 rounded-3xl" style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.8), rgba(255,255,255,0.3))', border: `1px dashed ${selected.color}40` }}>
-              <img
-                src={selected.image}
-                alt={`Visualisasi ${selected.nama}`}
-                className="w-48 h-48 md:w-64 md:h-64 object-contain transition-transform duration-500 hover:scale-105"
-                style={{ filter: `drop-shadow(0 16px 24px ${selected.color}50)` }}
-              />
+          <p className="text-base font-medium text-slate-600 mb-8 italic leading-relaxed border-l-4 pl-4 border-emerald-400">
+            "{selected.deskripsi_singkat}"
+          </p>
+
+          {/* Reference Image Focus */}
+          <div className="mb-10 flex flex-col items-center justify-center p-6 md:p-8 rounded-3xl" style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.8), rgba(255,255,255,0.3))', border: `1px dashed ${selected.color}40` }}>
+            <img
+              src={selected.image}
+              alt={`Visualisasi ${selected.nama}`}
+              className="w-48 h-48 md:w-64 md:h-64 object-contain transition-transform duration-500 hover:scale-105"
+              style={{ filter: `drop-shadow(0 16px 24px ${selected.color}50)` }}
+            />
+          </div>
+
+          <div className="flex flex-col gap-5">
+            <div>
+              <h3 className="text-sm md:text-base font-bold text-slate-700 flex items-center gap-2 mb-2">
+                <Activity size={18} className="text-emerald-500" />
+                Penyebab & Sumber Infeksi
+              </h3>
+              <p className="text-sm md:text-base text-slate-600 leading-relaxed bg-white/40 p-4 rounded-xl border border-white/50">{selected.penyebab}</p>
             </div>
 
-            <div className="flex flex-col gap-5">
+            <div>
+              <h3 className="text-sm md:text-base font-bold text-slate-700 flex items-center gap-2 mb-2">
+                <AlertTriangle size={18} className="text-amber-500" />
+                Deteksi Gejala Visual
+              </h3>
+              <p className="text-sm md:text-base text-slate-600 leading-relaxed bg-white/40 p-4 rounded-xl border border-white/50">{selected.gejala_visual}</p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-4">
               <div>
-                <h3 className="text-sm md:text-base font-bold text-slate-700 flex items-center gap-2 mb-2">
-                  <Activity size={18} className="text-emerald-500" />
-                  Penyebab & Sumber Infeksi
+                <h3 className="text-sm md:text-base font-bold text-indigo-700 flex items-center gap-2 mb-2">
+                  <ShieldCheck size={18} className="text-indigo-500" />
+                  Preventif Pencegahan
                 </h3>
-                <p className="text-sm md:text-base text-slate-600 leading-relaxed bg-white/40 p-4 rounded-xl border border-white/50">{selected.penyebab}</p>
+                <p className="text-sm md:text-base text-slate-600 leading-relaxed bg-indigo-50/50 p-4 rounded-xl border border-indigo-100/50">{selected.cara_pencegahan}</p>
               </div>
-              
               <div>
-                <h3 className="text-sm md:text-base font-bold text-slate-700 flex items-center gap-2 mb-2">
-                  <AlertTriangle size={18} className="text-amber-500" />
-                  Deteksi Gejala Visual
+                <h3 className="text-sm md:text-base font-bold text-emerald-800 flex items-center gap-2 mb-2">
+                  <CheckCircle2 size={18} className="text-emerald-600" />
+                  Langkah Penanganan
                 </h3>
-                <p className="text-sm md:text-base text-slate-600 leading-relaxed bg-white/40 p-4 rounded-xl border border-white/50">{selected.gejala_visual}</p>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-4">
-                <div>
-                  <h3 className="text-sm md:text-base font-bold text-indigo-700 flex items-center gap-2 mb-2">
-                    <ShieldCheck size={18} className="text-indigo-500" />
-                    Preventif Pencegahan
-                  </h3>
-                  <p className="text-sm md:text-base text-slate-600 leading-relaxed bg-indigo-50/50 p-4 rounded-xl border border-indigo-100/50">{selected.cara_pencegahan}</p>
-                </div>
-                <div>
-                  <h3 className="text-sm md:text-base font-bold text-emerald-800 flex items-center gap-2 mb-2">
-                    <CheckCircle2 size={18} className="text-emerald-600" />
-                    Langkah Penanganan
-                  </h3>
-                  <p className="text-sm md:text-base text-slate-600 leading-relaxed bg-emerald-50/50 p-4 rounded-xl border border-emerald-100/50">{selected.cara_penanganan}</p>
-                </div>
+                <p className="text-sm md:text-base text-slate-600 leading-relaxed bg-emerald-50/50 p-4 rounded-xl border border-emerald-100/50">{selected.cara_penanganan}</p>
               </div>
             </div>
+          </div>
         </div>
       </div>
     )
@@ -154,11 +154,11 @@ export default function EdukasiPage() {
   // ── VIEW: HALAMAN MASTER (Grid List) ──
   return (
     <div className="w-full max-w-6xl mx-auto px-4 py-8 pb-28 md:pb-12 flex flex-col gap-8 animate-fade-in relative z-10">
-      
+
       {/* Header */}
       <div className="flex flex-col gap-2 items-center md:items-start text-center md:text-left mb-2">
         <div className="flex flex-col md:flex-row items-center gap-4">
-          <div 
+          <div
             className="w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg"
             style={{ background: 'linear-gradient(135deg, #10b981, #059669)' }}
           >
@@ -174,7 +174,7 @@ export default function EdukasiPage() {
       {/* Grid Thumbnail Cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 items-stretch">
         {dataPenyakit.map((item, idx) => (
-          <Link 
+          <Link
             key={idx}
             to={`/edukasi/${slugify(item.nama)}`}
             className="rounded-3xl p-4 md:p-6 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl cursor-pointer bg-white/50 backdrop-blur-md border border-white/60 shadow flex flex-col items-center justify-center text-center group block"
@@ -193,10 +193,10 @@ export default function EdukasiPage() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-2 mb-3 w-full">
               <item.icon size={18} color={item.color} strokeWidth={2.5} className="flex-shrink-0" />
               <h2 className="text-sm md:text-base font-bold text-slate-800 leading-tight">
-                 {item.nama.split(' (')[0]}
+                {item.nama.split(' (')[0]}
               </h2>
             </div>
-            
+
             <div className="text-[10px] md:text-xs text-slate-500 font-medium px-3 py-1.5 rounded-full border bg-white/40 transition-colors group-hover:bg-white/80" style={{ borderColor: `${item.color}30` }}>
               Lihat Detail →
             </div>

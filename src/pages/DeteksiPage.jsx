@@ -12,10 +12,14 @@ import { simpanRiwayat } from '../utils/db'
 import { kompresGambar } from '../utils/imageUtils'
 import HasilKartu from '../components/HasilKartu'
 
+// THRESHOLD: Confidence di bawah nilai ini dianggap "foto kurang jelas"
+const CONFIDENCE_THRESHOLD = 0.70
+
 function DeteksiPage({ modelReady }) {
   const [previewURL, setPreviewURL] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
   const [hasil, setHasil] = useState(null)
+  const [rendahKepercayaan, setRendahKepercayaan] = useState(null) // { akurasi }
   const [error, setError] = useState(null)
   const [savedInfo, setSavedInfo] = useState(null)
 
@@ -32,6 +36,7 @@ function DeteksiPage({ modelReady }) {
     if (!file) return
 
     setHasil(null)
+    setRendahKepercayaan(null)
     setError(null)
     setSavedInfo(null)
 
@@ -41,7 +46,7 @@ function DeteksiPage({ modelReady }) {
 
   /**
    * Handler utama analisis gambar
-   * Alur: validasi → loading → jeda UI → prediksi TF.js → simpan → tampil hasil
+   * Alur: validasi → loading → jeda UI → prediksi TF.js → cek confidence → simpan → tampil hasil
    */
   const handleAnalisis = useCallback(async () => {
     if (!imgRef.current || !modelReady) return
@@ -49,9 +54,10 @@ function DeteksiPage({ modelReady }) {
     setIsLoading(true)
     setError(null)
     setHasil(null)
+    setRendahKepercayaan(null)
     setSavedInfo(null)
 
-    // KOMENTAR PENTING: Jeda 50ms untuk memberikan waktu bagi browser me-render 
+    // KOMENTAR PENTING: Jeda 50ms untuk memberikan waktu bagi browser me-render
     // animasi loading sebelum UI thread diblokir oleh komputasi berat TensorFlow CPU.
     await new Promise(resolve => setTimeout(resolve, 50))
 
@@ -59,6 +65,15 @@ function DeteksiPage({ modelReady }) {
       console.log('[SiDaun] Memulai prediksi (CPU Backend)...')
       const prediksi = await predict(imgRef.current)
       console.log('[SiDaun] Prediksi selesai:', prediksi.kelas, `${(prediksi.akurasi * 100).toFixed(1)}%`)
+
+      // CEK THRESHOLD CONFIDENCE:
+      // Jika keyakinan model <= 70%, tampilkan peringatan foto ulang
+      // dan TIDAK simpan ke riwayat karena hasilnya tidak dapat diandalkan.
+      if (prediksi.akurasi <= CONFIDENCE_THRESHOLD) {
+        console.log(`[SiDaun] Confidence terlalu rendah (${(prediksi.akurasi * 100).toFixed(1)}%), meminta foto ulang.`)
+        setRendahKepercayaan({ akurasi: prediksi.akurasi })
+        return
+      }
 
       const imageBase64 = kompresGambar(imgRef.current, 500, 0.6)
 
@@ -87,6 +102,7 @@ function DeteksiPage({ modelReady }) {
    */
   const handleReset = useCallback(() => {
     setHasil(null)
+    setRendahKepercayaan(null)
     setError(null)
     setSavedInfo(null)
     if (previewURL) URL.revokeObjectURL(previewURL)
@@ -150,16 +166,39 @@ function DeteksiPage({ modelReady }) {
                   className="rounded-2xl overflow-hidden animate-scale-in"
                   style={{
                     aspectRatio: '4/3',
-                    border: '2px solid rgba(52, 211, 153, 0.5)',
-                    boxShadow: '0 4px 24px rgba(16, 185, 129, 0.15)',
+                    border: rendahKepercayaan
+                      ? '2px solid rgba(245, 158, 11, 0.6)'
+                      : '2px solid rgba(52, 211, 153, 0.5)',
+                    boxShadow: rendahKepercayaan
+                      ? '0 4px 24px rgba(245, 158, 11, 0.2)'
+                      : '0 4px 24px rgba(16, 185, 129, 0.15)',
                   }}
                 >
+                  {/* Overlay blur jika confidence rendah */}
+                  {rendahKepercayaan && (
+                    <div
+                      className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-2"
+                      style={{
+                        backdropFilter: 'blur(6px)',
+                        background: 'rgba(254, 243, 199, 0.65)',
+                      }}
+                    >
+                      <span style={{ fontSize: 36 }}>📷</span>
+                      <span
+                        className="text-xs font-bold text-center px-3"
+                        style={{ color: '#92400e' }}
+                      >
+                        Foto kurang jelas
+                      </span>
+                    </div>
+                  )}
                   <img
                     ref={imgRef}
                     src={previewURL}
                     alt="Preview daun cabai"
                     className="w-full h-full object-cover"
                     crossOrigin="anonymous"
+                    style={ rendahKepercayaan ? { filter: 'blur(2px)' } : {} }
                   />
                 </div>
                 {!isLoading && (
@@ -172,6 +211,7 @@ function DeteksiPage({ modelReady }) {
                       backdropFilter: 'blur(8px)',
                       border: 'none',
                       cursor: 'pointer',
+                      zIndex: 20,
                     }}
                   >
                     <RefreshCw size={11} />
@@ -322,7 +362,82 @@ function DeteksiPage({ modelReady }) {
             </div>
           )}
 
-          {/* Kartu Hasil */}
+          {/* ── Kartu Peringatan: Confidence Rendah (≤ 70%) ── */}
+          {rendahKepercayaan && !isLoading && (
+            <div
+              className="rounded-2xl overflow-hidden animate-slide-up"
+              style={{
+                border: '1.5px solid rgba(245, 158, 11, 0.5)',
+                boxShadow: '0 8px 32px rgba(245, 158, 11, 0.12), 0 2px 8px rgba(0,0,0,0.06)',
+              }}
+            >
+              {/* Header amber */}
+              <div
+                style={{
+                  background: 'linear-gradient(135deg, #fffbeb, #fef3c7)',
+                  padding: '20px 20px 16px',
+                  borderBottom: '1px solid rgba(245, 158, 11, 0.3)',
+                }}
+              >
+                <div className="flex flex-col items-center gap-3 text-center">
+                  <div
+                    className="w-16 h-16 rounded-2xl flex items-center justify-center animate-pulse"
+                    style={{ background: 'rgba(245, 158, 11, 0.15)' }}
+                  >
+                    <span style={{ fontSize: 36 }}>📷</span>
+                  </div>
+                  <div>
+                    <p className="text-base font-black" style={{ color: '#92400e' }}>
+                      Foto Kurang Jelas / Buram
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Body */}
+              <div style={{ background: 'white', padding: '16px 20px 20px' }}>
+                <p className="text-sm text-slate-600 leading-relaxed text-center mb-4">
+                  Model AI tidak dapat mengenali daun dengan cukup yakin. Kemungkinan foto terlalu buram, gelap, jauh, atau bukan gambar daun cabai.
+                </p>
+
+                {/* Tips */}
+                <div
+                  className="rounded-xl p-3 mb-4"
+                  style={{
+                    background: 'rgba(245, 158, 11, 0.06)',
+                    border: '1px solid rgba(245, 158, 11, 0.2)',
+                  }}
+                >
+                  <p className="text-xs font-semibold text-amber-700 mb-2">💡 Tips foto yang baik:</p>
+                  <ul className="text-xs text-amber-800 space-y-1 pl-1">
+                    <li>• Pastikan pencahayaan cukup (cahaya alami lebih baik)</li>
+                    <li>• Fokuskan kamera langsung pada daun</li>
+                    <li>• Jarak kamera 15–30 cm dari daun</li>
+                    <li>• Pastikan daun terlihat jelas dan tidak terpotong</li>
+                  </ul>
+                </div>
+
+                {/* Tombol Foto Ulang */}
+                <button
+                  id="btn-foto-ulang"
+                  onClick={handleReset}
+                  className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl font-bold text-sm transition-all duration-200 active:scale-95 hover:-translate-y-0.5"
+                  style={{
+                    background: 'linear-gradient(135deg, #f59e0b, #d97706)',
+                    color: 'white',
+                    border: 'none',
+                    cursor: 'pointer',
+                    boxShadow: '0 4px 12px rgba(245, 158, 11, 0.35)',
+                  }}
+                >
+                  <RefreshCw size={16} />
+                  Foto Ulang
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* ── Kartu Hasil Normal (confidence > 70%) ── */}
           {hasil && !isLoading && (
             <div className="animate-slide-up">
               <HasilKartu hasil={hasil} />

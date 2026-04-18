@@ -91,7 +91,7 @@ function LandingPage() {
             className="w-2 h-2 rounded-full animate-pulse-green"
             style={{ background: '#10b981' }}
           />
-          Powered by Sanupaii · SiDaun
+          Mejuah-Juah · Selamat datang di SiDaun
         </div>
 
         {/* Floating Leaf Icon */}
