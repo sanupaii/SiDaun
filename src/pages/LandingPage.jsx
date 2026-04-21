@@ -181,7 +181,7 @@ function LandingPage() {
             <button
               id="btn-mulai-deteksi"
               onClick={() => navigate('/deteksi')}
-              className="btn-neon"
+              className="btn-premium-emerald px-10 py-5 text-lg shadow-emerald-500/20"
             >
               <Sparkles size={20} />
               Mulai Deteksi Sekarang
@@ -197,107 +197,142 @@ function LandingPage() {
         </section>
       </div>
 
-
-
-      {/* ── Feature Cards ── */}
-      <section className="px-6 pt-16 md:pt-24 pb-16 md:pb-24">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-2xl md:text-3xl font-bold text-center text-slate-800 mb-3">
-            Kenapa SiDaun?
-          </h2>
-          <p className="text-center text-slate-600 font-medium mb-10 text-sm md:text-base">
-            Teknologi AI terkini untuk membantu petani cabai Di Tanah Karo
-          </p>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5">
-            {features.map(({ icon: Icon, title, desc, color, bgColor }, i) => (
-              <div
-                key={title}
-                className="glass-card rounded-3xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg animate-slide-up"
-                style={{ animationDelay: `${0.1 + i * 0.12}s` }}
-              >
-                <div
-                  className="w-12 h-12 rounded-2xl flex items-center justify-center mb-4"
-                  style={{ background: bgColor }}
+      {/* ── Feature Cards (Kenapa SiDaun) ── */}
+      <section className="section-dark-emerald-1 px-6 py-20 md:py-32 group">
+        <img 
+          src="/icons/karo.png" 
+          alt="Watermark Karo" 
+          className="watermark-karo opacity-[0.03] group-hover:opacity-[0.05] transition-opacity duration-700" 
+        />
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
+            
+            {/* Left Content */}
+            <div className="lg:col-span-5 flex flex-col items-start text-left">
+              <h2 className="premium-title">
+                Kenapa SiDaun?
+              </h2>
+              <p className="text-lg md:text-xl text-slate-300 leading-relaxed mb-10 font-medium max-w-lg">
+                Berbagai kumpulan teknologi cerdas dan sistem pakar yang dirancang khusus 
+                untuk membantu meningkatkan produktivitas serta menjaga kesehatan tanaman 
+                cabai Anda di Tanah Karo.
+              </p>
+              <div className="w-full md:w-auto">
+                <button 
+                  onClick={() => navigate('/about')}
+                  className="btn-premium-emerald py-4 px-10 text-lg shadow-emerald-500/20"
                 >
-                  <Icon size={24} color={color} strokeWidth={2} />
-                </div>
-                <h3 className="text-base font-bold text-slate-800 mb-2">{title}</h3>
-                <p className="text-sm text-slate-600 leading-relaxed font-medium">{desc}</p>
+                  Lihat Selengkapnya
+                </button>
               </div>
-            ))}
+            </div>
+
+            {/* Right Cards Grid */}
+            <div className="lg:col-span-7">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+                {features.map(({ icon: Icon, title, desc, color }, i) => (
+                  <div
+                    key={title}
+                    className="card-premium-dark animate-fade-in"
+                    style={{ animationDelay: `${0.2 + i * 0.1}s` }}
+                  >
+                    <div className="w-16 h-16 rounded-full flex items-center justify-center mb-6 bg-emerald-500/10 border border-emerald-500/20">
+                      <Icon size={32} color="#10b981" strokeWidth={2.5} />
+                    </div>
+                    <h3 className="text-xl font-black text-white mb-4 tracking-tight uppercase">{title}</h3>
+                    <p className="text-sm text-slate-400 leading-relaxed font-semibold">{desc}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
 
       {/* ── Disease Preview Section ── */}
-      <section className="px-6 pb-16 md:pb-24">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-2xl md:text-3xl font-bold text-center text-slate-800 mb-3">
-            Penyakit yang Dapat Dideteksi
-          </h2>
-          <p className="text-center text-slate-600 font-medium mb-10 text-sm md:text-base">
-            Model AI dilatih untuk mengenali 4 kondisi daun cabai
-          </p>
+      <section className="section-dark-emerald-2 px-6 py-20 md:py-32 border-t border-white/5">
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
+            
+            {/* Left Content */}
+            <div className="lg:col-span-5 flex flex-col items-start text-left">
+              <h2 className="premium-title">
+                Penyakit Cabai
+              </h2>
+              <p className="text-lg md:text-xl text-slate-300 leading-relaxed mb-10 font-medium max-w-lg">
+                Model AI kami dilatih secara mendalam untuk mengenali berbagai kategori 
+                kondisi daun cabai. Dapatkan diagnosa instan dan langkah penanganan yang tepat.
+              </p>
+              <div className="w-full md:w-auto">
+                <button 
+                  onClick={() => navigate('/edukasi')}
+                  className="btn-premium-emerald py-4 px-10 text-lg shadow-emerald-500/20"
+                >
+                  Buka Edukasi
+                </button>
+              </div>
+            </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
-            {[
-              { nama: 'Daun Bercak', image: '/bercak.png', color: '#000000ff', bg: 'rgba(21,128,61,0.05)', border: 'rgba(0, 0, 0, 0.2))' },
-              { nama: 'Daun Keriting', image: '/keriting.png', color: '#000000ff', bg: 'rgba(21,128,61,0.05)', border: 'rgba(0, 0, 0, 0.2))' },
-              { nama: 'Daun Kuning', image: '/kuning.png', color: '#000000ff', bg: 'rgba(21,128,61,0.05)', border: 'rgba(0, 0, 0, 0.2))' },
-              { nama: 'Daun Sehat', image: '/sehat.png', color: '#000000ff', bg: 'rgba(21,128,61,0.05)' },
-            ].map(({ nama, image, color, bg, border }) => (
-              <Link
-                key={nama}
-                to={`/edukasi/${slugify(nama)}`}
-                className="block group relative rounded-3xl p-6 text-center transition-all duration-500 hover:-translate-y-2 hover:shadow-xl cursor-pointer overflow-hidden"
-                style={{ background: bg, border: `1.5px solid ${border}` }}
-              >
-                {/* Glow background on hover */}
-                <div
-                  className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-500 pointer-events-none"
-                  style={{ background: `radial-gradient(circle at center, ${color} 0%, transparent 80%)` }}
-                />
+            {/* Right Cards Grid */}
+            <div className="lg:col-span-7">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+                {[
+                  { nama: 'Daun Bercak', image: '/bercak.png' },
+                  { nama: 'Daun Keriting', image: '/keriting.png' },
+                  { nama: 'Daun Kuning', image: '/kuning.png' },
+                  { nama: 'Daun Sehat', image: '/sehat.png' },
+                ].map(({ nama, image }, i) => (
+                  <Link
+                    key={nama}
+                    to={`/edukasi/${slugify(nama)}`}
+                    className="card-premium-dark group animate-fade-in"
+                    style={{ animationDelay: `${0.3 + i * 0.12}s` }}
+                  >
+                    <div className="mb-6 flex flex-col items-center justify-center relative">
+                      <div className="absolute inset-0 bg-emerald-500/10 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                      <img
+                        src={image}
+                        alt={nama}
+                        className="w-24 h-24 object-contain relative z-10 transition-transform duration-500 group-hover:scale-110"
+                        style={{ filter: `drop-shadow(0 12px 20px rgba(16,185,129,0.2))` }}
+                      />
+                    </div>
+                    <h3 className="text-xl font-black text-white mb-6 uppercase tracking-tight">{nama}</h3>
+                    <button className="btn-premium-emerald w-full py-2.5 text-xs tracking-widest uppercase">Lihat Kategori</button>
+                  </Link>
+                ))}
+              </div>
+            </div>
 
-                <div className="mb-4 flex flex-col items-center justify-center relative z-10">
-                  <img
-                    src={image}
-                    alt={nama}
-                    className="w-20 h-20 sm:w-28 sm:h-28 object-contain transition-transform duration-500 group-hover:scale-110 group-hover:-translate-y-1"
-                    style={{ filter: `drop-shadow(0 12px 20px ${color}40)` }}
-                  />
-                </div>
-                <div className="text-sm sm:text-base font-bold relative z-10 transition-colors duration-300" style={{ color }}>{nama}</div>
-              </Link>
-            ))}
           </div>
         </div>
       </section>
 
       {/* ── How It Works Section ── */}
-      <section className="px-6 pb-24 md:pb-32">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-2xl md:text-3xl font-bold text-center text-slate-800 mb-3">
+      <section className="section-dark-emerald-1 px-6 pt-16 md:pt-24 pb-24 md:pb-32">
+        <div className="max-w-4xl mx-auto relative z-10">
+          <h2 className="text-2xl md:text-3xl font-bold text-center text-white mb-3 tracking-tight">
             Cara Kerja Model AI
           </h2>
-          <p className="text-center text-slate-600 font-medium mb-12 text-sm md:text-base">
+          <p className="text-center text-white/70 font-medium mb-12 text-sm md:text-base">
             Proses deteksi cerdas yang mudah dan cepat
           </p>
 
           <div className="relative">
             {/* Desktop Connectors (Z-Pattern) */}
-            <div className="hidden md:block absolute inset-0 pointer-events-none">
+            <div className="hidden md:block absolute inset-0 pointer-events-none opacity-40">
               {/* Box 1 -> Box 2 (Top Row) */}
               <div className="absolute top-[25%] left-[50%] -translate-x-1/2">
-                <ArrowRight size={24} className="text-slate-300" />
+                <ArrowRight size={24} className="text-emerald-400" />
               </div>
               {/* Box 2 -> Box 3 (Right Side Drop) */}
               <div className="absolute top-[50%] right-[25%] -translate-y-1/2">
-                <ArrowDown size={24} className="text-slate-300" />
+                <ArrowDown size={24} className="text-emerald-400" />
               </div>
               {/* Box 3 -> Box 4 (Bottom Row) */}
               <div className="absolute top-[75%] left-[50%] -translate-x-1/2">
-                <ArrowRight className="text-slate-300 rotate-180" size={24} />
+                <ArrowRight className="text-emerald-400 rotate-180" size={24} />
               </div>
             </div>
 
@@ -309,19 +344,19 @@ function LandingPage() {
                   className="relative group animate-slide-up"
                   style={{ animationDelay: `${0.1 + i * 0.15}s` }}
                 >
-                  <div className="container-hijau-pekat p-6 flex items-start gap-5 relative z-10 hover:shadow-md transition-all duration-300">
+                  <div className="container-hijau-pekat p-6 flex items-start gap-5 relative z-10 hover:shadow-2xl transition-all duration-300 border-white/10" style={{ background: 'rgba(255,255,255,0.03)' }}>
                     <div
                       className="w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0"
-                      style={{ background: `${step.color}15` }}
+                      style={{ background: `${step.color}25` }}
                     >
-                      <step.icon size={24} color={step.color} />
+                      <step.icon size={24} color={step.color} strokeWidth={2.5} />
                     </div>
                     <div>
-                      <h3 className="text-base font-bold text-slate-800 mb-1">{step.title}</h3>
-                      <p className="text-sm text-slate-600 leading-relaxed font-medium">{step.desc}</p>
+                      <h3 className="text-base font-bold text-white mb-1">{step.title}</h3>
+                      <p className="text-sm text-white/60 leading-relaxed font-medium">{step.desc}</p>
                     </div>
                     {/* Step Number Badge */}
-                    <div className="absolute -top-3 -left-3 w-8 h-8 rounded-full bg-white border-2 border-emerald-500 text-emerald-600 flex items-center justify-center text-xs font-black shadow-sm">
+                    <div className="absolute -top-3 -left-3 w-8 h-8 rounded-full bg-slate-900 border-2 border-emerald-500 text-emerald-400 flex items-center justify-center text-xs font-black shadow-lg">
                       {i === 2 ? 4 : i === 3 ? 3 : i + 1}
                     </div>
                   </div>
@@ -329,7 +364,7 @@ function LandingPage() {
                   {/* Mobile Arrow */}
                   {i < howItWorks.length - 1 && (
                     <div className="md:hidden flex justify-center py-4">
-                      <ArrowDown size={20} className="text-slate-300" />
+                      <ArrowDown size={20} className="text-white/20" />
                     </div>
                   )}
                 </div>
@@ -341,7 +376,7 @@ function LandingPage() {
             <button
               id="btn-mulai-deteksi-bottom"
               onClick={() => navigate('/deteksi')}
-              className="btn-neon px-12 py-5 text-lg"
+              className="btn-premium-emerald px-12 py-5 text-lg"
             >
               <Sparkles size={22} />
               Coba Sekarang

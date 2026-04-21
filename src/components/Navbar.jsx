@@ -24,7 +24,7 @@ function Navbar() {
           DESKTOP — Sticky Glassmorphism Top Navbar
           Tampil pada lebar layar md (≥768px) ke atas
           ══════════════════════════════════════════ */}
-      <header className="sticky top-0 z-50 w-full glass-nav">
+      <header className="fixed top-0 z-50 w-full glass-nav">
         <div className="max-w-6xl mx-auto px-4 md:px-6 h-16 flex items-center justify-between">
 
           {/* Brand & Region Section */}

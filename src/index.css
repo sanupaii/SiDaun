@@ -289,19 +289,19 @@ body {
 
 /* ---- Glass Navigation ---- */
 .glass-nav {
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1.5px solid rgba(255, 255, 255, 0.8);
-  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.12);
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
 }
 
 .glass-nav-bottom {
-  background: rgba(255, 255, 255, 0.96);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-top: 1.5px solid rgba(255, 255, 255, 0.9);
-  box-shadow: 0 -8px 40px rgba(0, 0, 0, 0.12);
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(20px) saturate(190%);
+  -webkit-backdrop-filter: blur(20px) saturate(190%);
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.08);
 }
 
 /* ---- Green Gradient Button ---- */
@@ -438,22 +438,155 @@ body {
 /* ── Hero Landing with Image Reference ── */
 .hero-landing-bg {
   position: relative;
-  background-image: 
+  background-image:
     linear-gradient(rgba(15, 23, 42, 0.45) 0%, rgba(15, 23, 42, 0.7) 100%),
     url('/karo2.jpg');
   background-size: cover;
   background-position: center;
-  background-attachment: scroll; /* Scroll normal di landing hero */
+  background-attachment: scroll;
+  /* Scroll normal di landing hero */
   color: #ffffff;
 }
 
-.hero-landing-bg::after {
-  content: '';
+
+/* ────────────────────────────────────────────────────────────────
+   KARO THEMED SECTIONS & WATERMARKS
+   Custom backgrounds for landing page sections
+   ──────────────────────────────────────────────────────────────── */
+
+.section-karo-green {
+  position: relative;
+  background: linear-gradient(135deg, #064e3b 0%, #022c22 100%);
+  overflow: hidden;
+}
+
+.section-karo-light-green {
+  position: relative;
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+  overflow: hidden;
+}
+
+.watermark-karo {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 120px;
-  background: linear-gradient(to bottom, transparent, #ffffff);
+  top: 50%;
+  left: 2%;
+  transform: translateY(-50%);
+  width: 450px;
+  height: auto;
+  opacity: 0.1;
   pointer-events: none;
+  z-index: 0;
+  filter: grayscale(1) brightness(4);
+}
+
+/* Alternate watermark position for better visual balance */
+.section-karo-green .watermark-karo {
+  left: auto;
+  right: 0;
+  transform: translateY(-50%) translateX(15%);
+}
+
+.section-karo-light-green .watermark-karo {
+  opacity: 0.08;
+  filter: grayscale(1) brightness(0.2);
+  /* Darker watermark on light bg */
+}
+
+/* Card styles for different backgrounds */
+.glass-green-card-dark {
+  background: rgba(16, 185, 129, 0.1);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1.2px solid rgba(16, 185, 129, 0.25);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+}
+
+.glass-green-card-light {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1.2px solid rgba(16, 185, 129, 0.2);
+  box-shadow: 0 8px 32px rgba(16, 185, 129, 0.08);
+}
+
+/* ────────────────────────────────────────────────────────────────
+   PREMIUM DARK SECTION & CARDS (Reference: Monografi Hukum style)
+   ──────────────────────────────────────────────────────────────── */
+.section-dark-emerald-1 {
+  background-color: #011f13; /* Deepest Green from Image 1 */
+  color: #ffffff;
+  position: relative;
+}
+
+.section-dark-emerald-2 {
+  background-color: #064e3b; /* Mid Deep Green from Image 2 */
+  color: #ffffff;
+  position: relative;
+}
+
+.section-premium-dark {
+  color: #ffffff;
+  position: relative;
+  overflow: hidden;
+}
+
+.premium-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #ffffff;
+  display: inline-block;
+  border-bottom: 3.5px solid #10b981; /* Emerald underline */
+  padding-bottom: 8px;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.02em;
+}
+
+.card-premium-dark {
+  background: rgba(6, 78, 59, 0.4); /* Deep emerald overlay */
+  backdrop-filter: blur(10px);
+  border-top: 4px solid #10b981; 
+  border-radius: 20px;
+  padding: 2.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  border-left: 1px solid rgba(255, 255, 255, 0.05);
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  height: 100%;
+}
+
+.card-premium-dark:hover {
+  transform: translateY(-10px);
+  background: rgba(6, 78, 59, 0.6);
+  box-shadow: 0 20px 40px rgba(16, 185, 129, 0.15);
+}
+
+.btn-premium-emerald {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: #ffffff;
+  font-weight: 800;
+  padding: 12px 24px;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  border: none;
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.btn-premium-emerald:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(16, 185, 129, 0.5);
+  filter: brightness(1.1);
+}
+
+.btn-premium-emerald:active {
+  transform: translateY(0);
 }

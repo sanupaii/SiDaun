@@ -125,7 +125,7 @@ function App() {
         <Navbar />
 
         {/* ── Halaman Konten ── */}
-        <main className="flex-1 w-full relative">
+        <main className="flex-1 w-full relative pt-16">
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route path="/deteksi" element={<DeteksiPage modelReady={modelReady} />} />
