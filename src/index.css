@@ -288,20 +288,40 @@ body {
 }
 
 /* ---- Glass Navigation ---- */
+/* ══════════════════════════════════════════
+   NAVBAR STYLES (Desktop Glass vs Mobile Solid)
+   ══════════════════════════════════════════ */
+
+/* Desktop Top Navbar */
 .glass-nav {
-  background: rgba(255, 255, 255, 0.4);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+  background: #ffffff; /* Solid white on mobile */
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
+@media (min-width: 768px) {
+  .glass-nav {
+    background: rgba(255, 255, 255, 0.4) !important;
+    backdrop-filter: blur(20px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.4) !important;
+  }
+}
+
+/* Mobile Bottom Navbar (Android style) */
 .glass-nav-bottom {
-  background: rgba(255, 255, 255, 0.45);
-  backdrop-filter: blur(20px) saturate(190%);
-  -webkit-backdrop-filter: blur(20px) saturate(190%);
-  border-top: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.08);
+  background: #ffffff; /* Solid white on mobile */
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05);
+}
+
+@media (min-width: 768px) {
+  .glass-nav-bottom {
+    background: rgba(255, 255, 255, 0.45) !important;
+    backdrop-filter: blur(20px) saturate(190%) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(190%) !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.3) !important;
+  }
 }
 
 /* ---- Green Gradient Button ---- */
