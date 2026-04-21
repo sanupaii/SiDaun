@@ -52,7 +52,7 @@ export default defineConfig({
         // Diperlukan agar file .bin model TF.js (~4MB) ter-cache untuk mode offline
         maximumFileSizeToCacheInBytes: 10_000_000,
         // Cache semua aset termasuk file model TF.js
-        globPatterns: ['**/*.{js,css,html,ico,png,svg,json,bin,wasm}'],
+        globPatterns: ['**/*.{js,css,html,ico,png,jpg,jpeg,webp,svg,json,bin,wasm}'],
         runtimeCaching: [
           {
             // Cache tambahan runtime untuk Google Fonts jika ada
