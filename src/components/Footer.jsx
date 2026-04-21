@@ -21,6 +21,15 @@ function Footer() {
               <Leaf size={16} color="white" strokeWidth={2} />
             </div>
             <span className="text-lg font-black text-slate-900">SiDaun</span>
+            <div className="w-[1.5px] h-4 bg-slate-300 mx-1" />
+            <div className="flex items-center gap-1.5 cursor-default group">
+              <img
+                src="/icons/karo.png"
+                alt="Logo Kabupaten Karo"
+                className="w-5 h-auto object-contain"
+              />
+              <span className="text-[10px] font-black text-slate-600 uppercase tracking-tighter">Kab. Karo</span>
+            </div>
           </div>
           <p className="text-xs text-slate-500 leading-relaxed">
             Aplikasi deteksi penyakit daun cabai berbasis AI untuk mendukung petani Indonesia.

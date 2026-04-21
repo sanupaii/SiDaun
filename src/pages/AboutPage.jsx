@@ -61,13 +61,13 @@ function AboutPage() {
           <h1 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight">
             Tentang Pengembang
           </h1>
-          <p className="text-sm text-slate-500">Profil akademisi & informasi proyek</p>
+          <p className="text-sm text-slate-700 font-medium">Profil akademisi & informasi proyek</p>
         </div>
       </div>
 
       {/* ── Profile Card ── */}
       <div
-        className="glass-card rounded-3xl overflow-hidden animate-slide-up"
+        className="container-hijau-pekat overflow-hidden animate-slide-up"
       >
         {/* Banner Gradient */}
         <div
@@ -131,11 +131,11 @@ function AboutPage() {
           </h2>
 
           <div className="flex flex-col gap-2 mb-5">
-            <div className="flex items-center gap-2 text-sm text-slate-600">
+            <div className="flex items-center gap-2 text-sm text-slate-700 font-medium">
               <GraduationCap size={15} color="#10b981" />
               <span>Mahasiswa Tingkat Akhir · Sistem Informasi</span>
             </div>
-            <div className="flex items-center gap-2 text-sm text-slate-600">
+            <div className="flex items-center gap-2 text-sm text-slate-700 font-medium">
               <MapPin size={15} color="#10b981" />
               <span>STMIK Triguna Dharma, Medan</span>
             </div>
@@ -153,13 +153,13 @@ function AboutPage() {
               <BookOpen size={16} color="#10b981" />
               <h3 className="text-sm font-bold text-slate-700">Tentang Proyek Skripsi</h3>
             </div>
-            <p className="text-sm text-slate-600 leading-relaxed">
-              Aplikasi <span className="font-semibold text-emerald-700">Progressive Web App (PWA)</span> ini
+            <p className="text-sm text-slate-700 leading-relaxed font-medium">
+              Aplikasi <span className="font-bold text-emerald-800">Progressive Web App (PWA)</span> ini
               dikembangkan sebagai bagian dari penelitian skripsi berjudul:
             </p>
             <div
-              className="mt-3 p-3 rounded-xl italic text-sm font-medium text-slate-700 text-center leading-relaxed"
-              style={{ background: 'rgba(255,255,255,0.7)', border: '1px dashed rgba(52,211,153,0.4)' }}
+              className="mt-3 p-3 rounded-xl italic text-sm font-black text-slate-800 text-center leading-relaxed"
+              style={{ background: 'rgba(255,255,255,0.7)', border: '1px dashed rgba(52,211,153,0.6)' }}
             >
               "Implementasi Convolutional Neural Network pada Progressive Web App untuk
               Deteksi Penyakit Daun Cabai (Studi Kasus: Kabupaten Karo)"
@@ -178,7 +178,7 @@ function AboutPage() {
           {techStack.map(({ name, desc, color, bg }) => (
             <div
               key={name}
-              className="glass-card rounded-2xl p-4 transition-all duration-200 hover:-translate-y-0.5"
+              className="container-hijau-pekat p-4 hover:-translate-y-0.5 transition-all duration-200"
             >
               <div
                 className="w-8 h-8 rounded-xl flex items-center justify-center mb-3"
@@ -190,7 +190,7 @@ function AboutPage() {
                 />
               </div>
               <div className="text-sm font-bold text-slate-800">{name}</div>
-              <div className="text-xs text-slate-500 mt-0.5 leading-snug">{desc}</div>
+              <div className="text-xs text-slate-700 mt-0.5 leading-snug font-medium">{desc}</div>
             </div>
           ))}
         </div>
@@ -198,7 +198,7 @@ function AboutPage() {
 
       {/* ── App Info ── */}
       <div
-        className="glass-card rounded-3xl p-6 animate-slide-up"
+        className="container-hijau-pekat p-6 animate-slide-up"
         style={{ animationDelay: '0.25s' }}
       >
         <h2 className="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
@@ -213,8 +213,8 @@ function AboutPage() {
             { label: 'Lisensi', value: 'Akademik' },
           ].map(({ label, value }) => (
             <div key={label} className="text-center">
-              <div className="text-xs text-slate-400 font-medium mb-1">{label}</div>
-              <div className="text-sm font-bold text-slate-700">{value}</div>
+              <div className="text-xs text-slate-500 font-bold mb-1">{label}</div>
+              <div className="text-sm font-black text-slate-800">{value}</div>
             </div>
           ))}
         </div>
@@ -226,7 +226,7 @@ function AboutPage() {
           <MessageCircle size={18} color="#10b981" />
           Hubungi Saya
         </h2>
-        <p className="text-sm text-slate-500 mb-4">Terhubung melalui platform berikut</p>
+        <p className="text-sm text-slate-700 mb-4 font-medium">Terhubung melalui platform berikut</p>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
 
@@ -235,7 +235,7 @@ function AboutPage() {
             href="https://wa.me/6282277235503"
             target="_blank"
             rel="noopener noreferrer"
-            className="glass-card rounded-2xl p-4 flex flex-col items-center gap-3 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg group no-underline"
+            className="container-hijau-pekat p-4 flex flex-col items-center gap-3 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg group no-underline"
           >
             <div
               className="w-12 h-12 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-200"
@@ -255,7 +255,7 @@ function AboutPage() {
             href="https://instagram.com/alex.24434987"
             target="_blank"
             rel="noopener noreferrer"
-            className="glass-card rounded-2xl p-4 flex flex-col items-center gap-3 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg group no-underline"
+            className="container-hijau-pekat p-4 flex flex-col items-center gap-3 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg group no-underline"
           >
             <div
               className="w-12 h-12 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-200"
@@ -275,7 +275,7 @@ function AboutPage() {
             href="https://github.com/sanupaii"
             target="_blank"
             rel="noopener noreferrer"
-            className="glass-card rounded-2xl p-4 flex flex-col items-center gap-3 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg group no-underline"
+            className="container-hijau-pekat p-4 flex flex-col items-center gap-3 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg group no-underline"
           >
             <div
               className="w-12 h-12 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-200"
@@ -295,7 +295,7 @@ function AboutPage() {
             href="https://www.linkedin.com/in/sanu-ahadi-waruwu-4357ab303"
             target="_blank"
             rel="noopener noreferrer"
-            className="glass-card rounded-2xl p-4 flex flex-col items-center gap-3 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg group no-underline"
+            className="container-hijau-pekat p-4 flex flex-col items-center gap-3 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg group no-underline"
           >
             <div
               className="w-12 h-12 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-200"

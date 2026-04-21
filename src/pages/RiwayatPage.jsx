@@ -91,7 +91,7 @@ function RiwayatPage() {
             <h1 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight">
               Riwayat Deteksi
             </h1>
-            <p className="text-sm text-slate-500">
+            <p className="text-sm text-slate-700 font-medium">
               {loading
                 ? 'Memuat riwayat…'
                 : daftarRiwayat.length > 0
@@ -139,7 +139,7 @@ function RiwayatPage() {
           {[1, 2, 3, 4, 5, 6].map(i => (
             <div
               key={i}
-              className="glass-card rounded-3xl p-4 animate-pulse"
+              className="container-hijau-pekat p-4 animate-pulse opacity-60"
             >
               <div className="flex gap-3 items-center mb-3">
                 <div className="w-16 h-16 rounded-2xl bg-emerald-50 flex-shrink-0" />
@@ -157,15 +157,15 @@ function RiwayatPage() {
 
       {/* ── Empty State ── */}
       {!loading && daftarRiwayat.length === 0 && (
-        <div className="glass-card rounded-3xl p-12 flex flex-col items-center justify-center text-center animate-fade-in">
+        <div className="container-hijau-pekat p-12 flex flex-col items-center justify-center text-center animate-fade-in">
           <div
             className="w-24 h-24 rounded-3xl flex items-center justify-center mb-6 animate-float"
             style={{ background: 'linear-gradient(135deg, #f0fdf4, #dcfce7)' }}
           >
             <Leaf size={44} color="#10b981" strokeWidth={1.3} />
           </div>
-          <h3 className="text-lg font-bold text-slate-700 mb-2">Belum Ada Riwayat</h3>
-          <p className="text-sm text-slate-400 leading-relaxed max-w-xs">
+          <h3 className="text-lg font-black text-slate-800 mb-2">Belum Ada Riwayat</h3>
+          <p className="text-sm text-slate-600 leading-relaxed max-w-xs font-medium">
             Hasil deteksi akan otomatis tersimpan di sini setelah Anda melakukan analisis daun.
           </p>
         </div>
@@ -181,10 +181,10 @@ function RiwayatPage() {
             return (
               <div
                 key={item.id}
-                className="glass-card rounded-3xl overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+                className="container-hijau-pekat overflow-hidden transition-all duration-300 hover:-translate-y-1"
                 style={{
                   animation: `slide-up 0.4s cubic-bezier(0.16, 1, 0.3, 1) ${index * 0.05}s both`,
-                  borderColor: badge.border,
+                  borderColor: `${badge.color}40`,
                 }}
               >
                 {/* Card Header: Thumbnail */}
@@ -268,8 +268,8 @@ function RiwayatPage() {
 
                   {/* Timestamp */}
                   <div className="flex items-center gap-1.5 mb-4">
-                    <Clock size={11} color="#9ca3af" />
-                    <span className="text-xs text-slate-400">{formatTanggal(item.timestamp)}</span>
+                    <Clock size={11} color="#4b5563" />
+                    <span className="text-xs text-slate-600 font-bold">{formatTanggal(item.timestamp)}</span>
                   </div>
 
                   {/* Tombol Detail PWA */}

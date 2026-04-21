@@ -23,7 +23,7 @@ import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import ScrollToTop from './components/ScrollToTop'
 
-import FallingLeaves from './components/FallingLeaves'
+
 
 function App() {
   const location = useLocation()
@@ -84,7 +84,7 @@ function App() {
     <ModelContext.Provider value={{ modelReady }}>
       <div className="min-h-screen mesh-gradient-bg flex flex-col font-sans text-slate-900 selection:bg-emerald-100 selection:text-emerald-900 relative overflow-x-hidden">
         {/* ── Background Effects ── */}
-        <FallingLeaves />
+
         
         <ScrollToTop />
         

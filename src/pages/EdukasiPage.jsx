@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
-import { BookOpen, AlertTriangle, Activity, ShieldCheck, CheckCircle2, ArrowLeft } from 'lucide-react'
+import { BookOpen, AlertTriangle, Activity, ShieldCheck, CheckCircle2, ArrowLeft, CloudSun, MapPin, Sprout } from 'lucide-react'
 
 // Convert external name cleanly to slug
 const slugify = (text) => text.split(' (')[0].toLowerCase().trim().replace(/\s+/g, '-')
@@ -80,7 +80,7 @@ export default function EdukasiPage() {
       <div className="w-full max-w-4xl mx-auto px-4 py-8 pb-28 md:pb-12 flex flex-col gap-6 animate-fade-in relative z-10">
         <button
           onClick={() => navigate(-1)} // Navigasi Histori (-1)
-          className="flex items-center gap-2 text-slate-500 hover:text-emerald-600 transition-colors font-medium w-fit mb-2 group"
+          className="flex items-center gap-2 text-slate-700 hover:text-emerald-800 transition-colors font-bold w-fit mb-2 group"
         >
           <ArrowLeft size={20} className="transition-transform group-hover:-translate-x-1" />
           Kembali
@@ -88,8 +88,8 @@ export default function EdukasiPage() {
 
         {/* Efek Border Neon/Highlight via custom style & ring animation */}
         <div
-          className="rounded-3xl p-6 md:p-10 transition-all duration-300 bg-white/60 backdrop-blur-md border-[2px] shadow-2xl animate-scale-in"
-          style={{ borderColor: selected.color, boxShadow: `0 0 40px ${selected.color}30` }}
+          className="container-hijau-pekat p-6 md:p-10 animate-scale-in"
+          style={{ borderColor: `${selected.color}60`, boxShadow: `0 8px 32px ${selected.color}15` }}
         >
           <div className="flex items-center gap-4 mb-6">
             <div className="p-3.5 rounded-2xl border" style={{ background: selected.bgBadge, borderColor: `${selected.color}30` }}>
@@ -98,7 +98,7 @@ export default function EdukasiPage() {
             <h2 className="text-2xl md:text-3xl font-black text-slate-800 tracking-tight">{selected.nama}</h2>
           </div>
 
-          <p className="text-base font-medium text-slate-600 mb-8 italic leading-relaxed border-l-4 pl-4 border-emerald-400">
+          <p className="text-base font-bold text-slate-700 mb-8 italic leading-relaxed border-l-4 pl-4 border-emerald-500">
             "{selected.deskripsi_singkat}"
           </p>
 
@@ -118,7 +118,7 @@ export default function EdukasiPage() {
                 <Activity size={18} className="text-emerald-500" />
                 Penyebab & Sumber Infeksi
               </h3>
-              <p className="text-sm md:text-base text-slate-600 leading-relaxed bg-white/40 p-4 rounded-xl border border-white/50">{selected.penyebab}</p>
+              <p className="text-sm md:text-base text-slate-700 leading-relaxed bg-white/70 p-4 rounded-xl border border-white/80 font-medium">{selected.penyebab}</p>
             </div>
 
             <div>
@@ -126,7 +126,7 @@ export default function EdukasiPage() {
                 <AlertTriangle size={18} className="text-amber-500" />
                 Deteksi Gejala Visual
               </h3>
-              <p className="text-sm md:text-base text-slate-600 leading-relaxed bg-white/40 p-4 rounded-xl border border-white/50">{selected.gejala_visual}</p>
+              <p className="text-sm md:text-base text-slate-700 leading-relaxed bg-white/70 p-4 rounded-xl border border-white/80 font-medium">{selected.gejala_visual}</p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-4">
@@ -135,14 +135,14 @@ export default function EdukasiPage() {
                   <ShieldCheck size={18} className="text-indigo-500" />
                   Preventif Pencegahan
                 </h3>
-                <p className="text-sm md:text-base text-slate-600 leading-relaxed bg-indigo-50/50 p-4 rounded-xl border border-indigo-100/50">{selected.cara_pencegahan}</p>
+                <p className="text-sm md:text-base text-slate-800 leading-relaxed bg-indigo-50 p-4 rounded-xl border border-indigo-200 font-medium">{selected.cara_pencegahan}</p>
               </div>
               <div>
                 <h3 className="text-sm md:text-base font-bold text-emerald-800 flex items-center gap-2 mb-2">
                   <CheckCircle2 size={18} className="text-emerald-600" />
                   Langkah Penanganan
                 </h3>
-                <p className="text-sm md:text-base text-slate-600 leading-relaxed bg-emerald-50/50 p-4 rounded-xl border border-emerald-100/50">{selected.cara_penanganan}</p>
+                <p className="text-sm md:text-base text-slate-800 leading-relaxed bg-emerald-50 p-4 rounded-xl border border-emerald-200 font-medium">{selected.cara_penanganan}</p>
               </div>
             </div>
           </div>
@@ -159,49 +159,107 @@ export default function EdukasiPage() {
       <div className="flex flex-col gap-2 items-center md:items-start text-center md:text-left mb-2">
         <div className="flex flex-col md:flex-row items-center gap-4">
           <div
-            className="w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg"
+            className="w-10 h-10 rounded-2xl flex items-center justify-center"
             style={{ background: 'linear-gradient(135deg, #10b981, #059669)' }}
           >
-            <BookOpen size={28} color="white" strokeWidth={2.5} />
+            <BookOpen size={20} color="white" strokeWidth={2} />
           </div>
           <div>
-            <h1 className="text-3xl md:text-4xl font-black text-slate-800 tracking-tight">Ensiklopedia Penyakit</h1>
-            <p className="text-sm md:text-base text-slate-500 mt-1">Pilih jenis penyakit di bawah ini untuk melihat pedoman detail dari AI SiDaun.</p>
+            <h1 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight">Edukasi</h1>
+            <p className="text-sm md:text-base text-slate-700 mt-1 font-medium"> Cari tahu lebih lanjut tentang tanaman cabai dan Tanah Karo.</p>
+          </div>
+        </div>
+      </div>
+
+      {/* ── Section: Regional Intro (Tanah Karo) ── */}
+      <div className="container-hijau-pekat p-6 md:p-8 animate-slide-up" style={{ animationDelay: '0.1s' }}>
+        <div className="flex flex-col md:flex-row items-center gap-8">
+          {/* Logo Column */}
+          <div className="flex-shrink-0 flex flex-col items-center justify-center p-4 rounded-3xl bg-white/40 border border-white/50 shadow-sm transition-transform duration-500 hover:scale-105 group">
+            <img
+              src="/icons/karo.png"
+              alt="Logo Kabupaten Karo"
+              className="w-24 h-24 md:w-32 md:h-32 object-contain drop-shadow-lg group-hover:drop-shadow-xl transition-all"
+            />
+            <div className="mt-4 flex flex-col items-center">
+              <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest leading-none">Kabupaten</span>
+              <span className="text-xl font-black text-slate-900 tracking-tight leading-none">Karo</span>
+            </div>
+          </div>
+
+          {/* Content Column */}
+          <div className="flex-1 space-y-4 text-center md:text-left">
+            <div>
+              <h2 className="text-xl md:text-2xl font-black text-slate-900 mb-1 flex items-center justify-center md:justify-start gap-2">
+                <Sprout className="text-emerald-600" size={24} />
+                Lumbung Cabai Tanah Karo
+              </h2>
+              <p className="text-sm md:text-base text-slate-700 leading-relaxed font-medium">
+                Kabupaten Karo merupakan pusat agribisnis terbesar di Sumatra Utara. Terletak di dataran tinggi Bukit Barisan, wilayah ini memiliki karakteristik unik yang sangat mendukung pertumbuhan tanaman hortikultura, khususnya cabai merah.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="flex items-start gap-3 p-3 rounded-2xl bg-white/50 border border-white/60">
+                <div className="w-10 h-10 rounded-xl bg-orange-100 flex items-center justify-center flex-shrink-0">
+                  <CloudSun size={20} className="text-orange-600" />
+                </div>
+                <div>
+                  <h3 className="text-xs font-black text-slate-800 uppercase tracking-tighter">Iklim & Cuaca</h3>
+                  <p className="text-[11px] md:text-xs text-slate-600 leading-tight font-medium">Suhu sejuk (16-27°C) dengan kelembapan ideal untuk pembentukan klorofil optimal.</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3 p-3 rounded-2xl bg-white/50 border border-white/60">
+                <div className="w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center flex-shrink-0">
+                  <MapPin size={20} className="text-blue-600" />
+                </div>
+                <div>
+                  <h3 className="text-xs font-black text-slate-800 uppercase tracking-tighter">Geografis</h3>
+                  <p className="text-[11px] md:text-xs text-slate-600 leading-tight font-medium">Tanah vulkanik subur hasil erupsi Gunung Sinabung yang kaya akan unsur hara mikro.</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
       {/* Grid Thumbnail Cards */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 items-stretch">
-        {dataPenyakit.map((item, idx) => (
-          <Link
-            key={idx}
-            to={`/edukasi/${slugify(item.nama)}`}
-            className="rounded-3xl p-4 md:p-6 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl cursor-pointer bg-white/50 backdrop-blur-md border border-white/60 shadow flex flex-col items-center justify-center text-center group block"
-            style={{ animationDelay: `${idx * 0.1}s` }}
-          >
-            {/* Reference Image Thumbnail */}
-            <div className="mb-4 flex flex-col items-center justify-center p-3 rounded-2xl w-full" style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.7), rgba(255,255,255,0.2))', border: `1px dashed ${item.color}40` }}>
-              <img
-                src={item.image}
-                alt={`Visualisasi ${item.nama}`}
-                className="w-24 h-24 md:w-32 md:h-32 object-contain transition-transform duration-500 group-hover:scale-110"
-                style={{ filter: `drop-shadow(0 12px 16px ${item.color}30)` }}
-              />
-            </div>
+      <div>
+        <h2 className="text-lg md:text-xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+          <BookOpen className="text-emerald-600" size={20} />
+          Ensiklopedia Penyakit
+        </h2>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 items-stretch">
+          {dataPenyakit.map((item, idx) => (
+            <Link
+              key={idx}
+              to={`/edukasi/${slugify(item.nama)}`}
+              className="container-hijau-pekat p-4 md:p-6 flex flex-col items-center justify-center text-center group block hover:-translate-y-1 transition-all duration-300"
+              style={{ animationDelay: `${idx * 0.1}s` }}
+            >
+              {/* Reference Image Thumbnail */}
+              <div className="mb-4 flex flex-col items-center justify-center p-3 rounded-2xl w-full" style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.7), rgba(255,255,255,0.2))', border: `1px dashed ${item.color}40` }}>
+                <img
+                  src={item.image}
+                  alt={`Visualisasi ${item.nama}`}
+                  className="w-24 h-24 md:w-32 md:h-32 object-contain transition-transform duration-500 group-hover:scale-110"
+                  style={{ filter: `drop-shadow(0 12px 16px ${item.color}30)` }}
+                />
+              </div>
 
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-2 mb-3 w-full">
-              <item.icon size={18} color={item.color} strokeWidth={2.5} className="flex-shrink-0" />
-              <h2 className="text-sm md:text-base font-bold text-slate-800 leading-tight">
-                {item.nama.split(' (')[0]}
-              </h2>
-            </div>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-2 mb-3 w-full">
+                <item.icon size={18} color={item.color} strokeWidth={2.5} className="flex-shrink-0" />
+                <h2 className="text-sm md:text-base font-bold text-slate-800 leading-tight">
+                  {item.nama.split(' (')[0]}
+                </h2>
+              </div>
 
-            <div className="text-[10px] md:text-xs text-slate-500 font-medium px-3 py-1.5 rounded-full border bg-white/40 transition-colors group-hover:bg-white/80" style={{ borderColor: `${item.color}30` }}>
-              Lihat Detail →
-            </div>
-          </Link>
-        ))}
+              <div className="text-[10px] md:text-xs text-slate-700 font-black px-3 py-1.5 rounded-full border bg-white/60 transition-colors group-hover:bg-white" style={{ borderColor: `${item.color}50` }}>
+                Lihat Detail →
+              </div>
+            </Link>
+          ))}
+        </div>
       </div>
     </div>
   )

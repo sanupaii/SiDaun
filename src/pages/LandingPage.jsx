@@ -5,7 +5,7 @@
  */
 
 import { useNavigate, Link } from 'react-router-dom'
-import { Leaf, Sparkles, Shield, Zap, ArrowRight, ChevronDown, MapPin, GraduationCap } from 'lucide-react'
+import { Leaf, Sparkles, Shield, Zap, ArrowRight, ChevronDown, MapPin, GraduationCap, Activity, Camera, UploadCloud, Cpu, CheckCircle, ArrowDown } from 'lucide-react'
 
 const slugify = (text) => text.toLowerCase().trim().replace(/\s+/g, '-');
 
@@ -30,6 +30,40 @@ const features = [
     desc: 'Berfungsi penuh tanpa koneksi internet sebagai Progressive Web App (PWA).',
     color: '#f59e0b',
     bgColor: 'rgba(245, 158, 11, 0.1)',
+  },
+  {
+    icon: Activity,
+    title: 'Akurasi 95%+',
+    desc: 'Model AI dilatih untuk mengenali 4 kategori kondisi daun cabai dengan tingkat akurasi tinggi.',
+    color: '#8b5cf6',
+    bgColor: 'rgba(139, 92, 246, 0.1)',
+  },
+]
+
+const howItWorks = [
+  {
+    title: 'Ambil Foto',
+    desc: 'Ambil foto daun dari kamera atau pilih dari galeri.',
+    icon: Camera,
+    color: '#10b981'
+  },
+  {
+    title: 'Kirim Gambar',
+    desc: 'Gambar dikirim ke sistem model AI untuk dianalisis.',
+    icon: UploadCloud,
+    color: '#6366f1'
+  },
+  {
+    title: 'Hasil Deteksi',
+    desc: 'Sistem memberikan hasil deteksi dan tingkat akurasi.',
+    icon: CheckCircle,
+    color: '#8b5cf6'
+  },
+  {
+    title: 'Klasifikasi AI',
+    desc: 'Model AI melakukan identifikasi jenis penyakit.',
+    icon: Cpu,
+    color: '#f59e0b'
   },
 ]
 
@@ -76,140 +110,106 @@ function LandingPage() {
       </div>
 
       {/* ── Hero Section ── */}
-      <section className="relative flex flex-col items-center md:justify-start justify-center text-center px-6 pt-24 pb-16 md:pt-16 md:pb-12">
+      <div className="hero-landing-bg">
+        <section className="relative flex flex-col items-center md:justify-start justify-center text-center px-6 pt-16 pb-12 md:pt-12 md:pb-10 min-h-[80vh] md:min-h-[75vh] lg:min-h-[70vh]">
 
-        {/* Badge */}
-        <div
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold mb-8 md:mb-5 animate-fade-in"
-          style={{
-            background: 'rgba(16, 185, 129, 0.1)',
-            border: '1px solid rgba(52, 211, 153, 0.35)',
-            color: '#059669',
-          }}
-        >
+          {/* Badge */}
           <div
-            className="w-2 h-2 rounded-full animate-pulse-green"
-            style={{ background: '#10b981' }}
-          />
-          Mejuah-Juah · Selamat datang di SiDaun
-        </div>
-
-        {/* Floating Leaf Icon */}
-        <div
-          className="w-24 h-24 md:w-20 md:h-20 rounded-3xl flex items-center justify-center mb-8 md:mb-5 animate-float animate-glow"
-          style={{
-            background: 'linear-gradient(135deg, #10b981, #059669)',
-            boxShadow: '0 8px 40px rgba(16, 185, 129, 0.4)',
-          }}
-        >
-          <Leaf size={48} color="white" strokeWidth={2} />
-        </div>
-
-        {/* Headline */}
-        <h1
-          className="text-4xl md:text-5xl lg:text-7xl font-black tracking-tight mb-6 md:mb-4 animate-slide-up"
-          style={{ lineHeight: 1.1, animationDelay: '0.1s' }}
-        >
-          <span className="text-slate-900">Si</span>
-          <span
+            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[11px] font-bold mb-6 md:mb-4 animate-fade-in"
             style={{
-              background: 'linear-gradient(135deg, #10b981, #34d399, #059669)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
+              background: 'rgba(255, 255, 255, 0.12)',
+              border: '1px solid rgba(255, 255, 255, 0.25)',
+              color: '#ffffff',
+              backdropFilter: 'blur(8px)',
             }}
           >
-            Daun
-          </span>
-          <br />
-          <span className="text-slate-700 text-3xl md:text-4xl lg:text-5xl font-bold">
-            Asisten Cerdas Petani Cabai
-          </span>
-        </h1>
+            <div
+              className="w-2 h-2 rounded-full animate-pulse-green"
+              style={{ background: '#34d399' }}
+            />
+            Mejuah-Juah · Selamat datang di SiDaun
+          </div>
 
-        {/* Subtitle */}
-        <p
-          className="text-base md:text-lg lg:text-xl text-slate-500 max-w-2xl leading-relaxed mb-10 md:mb-6 animate-slide-up"
-          style={{ animationDelay: '0.2s' }}
-        >
-          Deteksi penyakit daun cabai secara instan menggunakan kecerdasan buatan.
-          Cukup foto daun Anda — AI kami siap menganalisis dalam hitungan detik.
-        </p>
-
-        {/* CTA Buttons */}
-        <div
-          className="flex flex-col sm:flex-row items-center gap-4 animate-slide-up"
-          style={{ animationDelay: '0.3s' }}
-        >
-          <button
-            id="btn-mulai-deteksi"
-            onClick={() => navigate('/deteksi')}
-            className="btn-neon"
-          >
-            <Sparkles size={20} />
-            Mulai Deteksi Sekarang
-            <ArrowRight size={18} />
-          </button>
-
-          <button
-            id="btn-lihat-riwayat-landing"
-            onClick={() => navigate('/riwayat')}
-            className="flex items-center gap-2 px-8 py-4 rounded-2xl font-semibold text-slate-600 transition-all duration-200 hover:bg-white hover:shadow-md"
+          {/* Floating Leaf Icon */}
+          <div
+            className="w-16 h-16 md:w-14 md:h-14 rounded-2xl flex items-center justify-center mb-6 md:mb-4 animate-float animate-glow"
             style={{
-              border: '1.5px solid rgba(0,0,0,0.1)',
-              fontSize: 16,
+              background: 'linear-gradient(135deg, #10b981, #059669)',
+              boxShadow: '0 6px 30px rgba(16, 185, 129, 0.4)',
             }}
           >
-            Lihat Riwayat
-          </button>
-        </div>
+            <Leaf size={32} color="white" strokeWidth={2.5} />
+          </div>
 
-        {/* Scroll hint */}
-        <div className="mt-16 md:mt-8 flex flex-col items-center gap-2 animate-fade-in" style={{ animationDelay: '0.8s' }}>
-          <span className="text-xs text-slate-400 font-medium">Scroll untuk selengkapnya</span>
-          <ChevronDown size={16} className="text-slate-400 animate-float" />
-        </div>
-      </section>
+          {/* Headline */}
+          <h1
+            className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight mb-5 md:mb-3 animate-slide-up"
+            style={{ lineHeight: 1.1, animationDelay: '0.1s' }}
+          >
+            <span className="text-white drop-shadow-lg">Si</span>
+            <span
+              style={{
+                background: 'linear-gradient(135deg, #34d399, #10b981, #d1fae5)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+                filter: 'drop-shadow(0 2px 10px rgba(16,185,129,0.3))',
+              }}
+            >
+              Daun
+            </span>
+            <br />
+            <span className="text-white/90 text-xl md:text-2xl lg:text-4xl font-bold drop-shadow-md">
+              Asisten Cerdas Petani Cabai Di Tanah Karo
+            </span>
+          </h1>
 
-      {/* ── Stats Strip ── */}
-      <section className="px-6 pb-12">
-        <div
-          className="max-w-4xl mx-auto grid grid-cols-3 gap-4 md:gap-8 glass-card rounded-3xl px-6 py-6 md:py-8"
-        >
-          {[
-            { value: '4', label: 'Kelas Penyakit', suffix: '' },
-            { value: '95', label: 'Akurasi Model', suffix: '%+' },
-            { value: '100', label: 'Offline Ready', suffix: '%' },
-          ].map(({ value, label, suffix }) => (
-            <div key={label} className="text-center">
-              <div
-                className="text-2xl md:text-4xl font-black mb-1"
-                style={{
-                  background: 'linear-gradient(135deg, #10b981, #059669)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
-                }}
-              >
-                {value}{suffix}
-              </div>
-              <div className="text-xs md:text-sm text-slate-500 font-medium">{label}</div>
-            </div>
-          ))}
-        </div>
-      </section>
+          {/* Subtitle */}
+          <p
+            className="text-sm md:text-base lg:text-lg text-white/80 max-w-xl leading-relaxed mb-8 md:mb-6 animate-slide-up"
+            style={{ animationDelay: '0.2s', textShadow: '0 2px 4px rgba(0,0,0,0.3)' }}
+          >
+            Deteksi penyakit daun cabai secara instan menggunakan kecerdasan buatan.
+            Cukup foto daun Anda AI kami siap menganalisis dalam hitungan detik.
+          </p>
+
+          {/* CTA Buttons */}
+          <div
+            className="flex flex-col sm:flex-row items-center gap-4 animate-slide-up"
+            style={{ animationDelay: '0.3s' }}
+          >
+            <button
+              id="btn-mulai-deteksi"
+              onClick={() => navigate('/deteksi')}
+              className="btn-neon"
+            >
+              <Sparkles size={20} />
+              Mulai Deteksi Sekarang
+              <ArrowRight size={18} />
+            </button>
+          </div>
+
+          {/* Scroll hint */}
+          <div className="mt-auto pt-16 md:pt-12 flex flex-col items-center gap-2 animate-fade-in" style={{ animationDelay: '0.8s' }}>
+            <span className="text-xs text-white/70 font-bold tracking-wider uppercase">Scroll untuk selengkapnya</span>
+            <ChevronDown size={16} className="text-white/60 animate-float" />
+          </div>
+        </section>
+      </div>
+
+
 
       {/* ── Feature Cards ── */}
-      <section className="px-6 pb-16 md:pb-24">
+      <section className="px-6 pt-16 md:pt-24 pb-16 md:pb-24">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-2xl md:text-3xl font-bold text-center text-slate-800 mb-3">
             Kenapa SiDaun?
           </h2>
-          <p className="text-center text-slate-500 mb-10 text-sm md:text-base">
-            Teknologi AI terkini untuk membantu petani cabai Indonesia
+          <p className="text-center text-slate-600 font-medium mb-10 text-sm md:text-base">
+            Teknologi AI terkini untuk membantu petani cabai Di Tanah Karo
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5">
             {features.map(({ icon: Icon, title, desc, color, bgColor }, i) => (
               <div
                 key={title}
@@ -223,7 +223,7 @@ function LandingPage() {
                   <Icon size={24} color={color} strokeWidth={2} />
                 </div>
                 <h3 className="text-base font-bold text-slate-800 mb-2">{title}</h3>
-                <p className="text-sm text-slate-500 leading-relaxed">{desc}</p>
+                <p className="text-sm text-slate-600 leading-relaxed font-medium">{desc}</p>
               </div>
             ))}
           </div>
@@ -236,7 +236,7 @@ function LandingPage() {
           <h2 className="text-2xl md:text-3xl font-bold text-center text-slate-800 mb-3">
             Penyakit yang Dapat Dideteksi
           </h2>
-          <p className="text-center text-slate-500 mb-10 text-sm md:text-base">
+          <p className="text-center text-slate-600 font-medium mb-10 text-sm md:text-base">
             Model AI dilatih untuk mengenali 4 kondisi daun cabai
           </p>
 
@@ -274,31 +274,78 @@ function LandingPage() {
         </div>
       </section>
 
-      {/* ── Final CTA ── */}
+      {/* ── How It Works Section ── */}
       <section className="px-6 pb-24 md:pb-32">
-        <div
-          className="max-w-2xl mx-auto rounded-3xl p-8 md:p-12 text-center overflow-hidden relative"
-          style={{
-            background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
-          }}
-        >
-          <div className="absolute top-0 right-0 w-64 h-64 bg-white opacity-5 rounded-full blur-3xl -translate-y-1/3 translate-x-1/3" />
-          <div className="relative z-10">
-            <h2 className="text-2xl md:text-3xl font-black text-white mb-4">
-              Siap Mendeteksi Penyakit Daun?
-            </h2>
-            <p className="text-emerald-100 mb-8 text-sm md:text-base leading-relaxed">
-              Ambil foto daun cabai Anda dan biarkan AI menganalisisnya dalam hitungan detik.
-            </p>
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-2xl md:text-3xl font-bold text-center text-slate-800 mb-3">
+            Cara Kerja Model AI
+          </h2>
+          <p className="text-center text-slate-600 font-medium mb-12 text-sm md:text-base">
+            Proses deteksi cerdas yang mudah dan cepat
+          </p>
+
+          <div className="relative">
+            {/* Desktop Connectors (Z-Pattern) */}
+            <div className="hidden md:block absolute inset-0 pointer-events-none">
+              {/* Box 1 -> Box 2 (Top Row) */}
+              <div className="absolute top-[25%] left-[50%] -translate-x-1/2">
+                <ArrowRight size={24} className="text-slate-300" />
+              </div>
+              {/* Box 2 -> Box 3 (Right Side Drop) */}
+              <div className="absolute top-[50%] right-[25%] -translate-y-1/2">
+                <ArrowDown size={24} className="text-slate-300" />
+              </div>
+              {/* Box 3 -> Box 4 (Bottom Row) */}
+              <div className="absolute top-[75%] left-[50%] -translate-x-1/2">
+                <ArrowRight className="text-slate-300 rotate-180" size={24} />
+              </div>
+            </div>
+
+            {/* Steps Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-y-16 md:gap-x-24">
+              {howItWorks.map((step, i) => (
+                <div
+                  key={step.title}
+                  className="relative group animate-slide-up"
+                  style={{ animationDelay: `${0.1 + i * 0.15}s` }}
+                >
+                  <div className="container-hijau-pekat p-6 flex items-start gap-5 relative z-10 hover:shadow-md transition-all duration-300">
+                    <div
+                      className="w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0"
+                      style={{ background: `${step.color}15` }}
+                    >
+                      <step.icon size={24} color={step.color} />
+                    </div>
+                    <div>
+                      <h3 className="text-base font-bold text-slate-800 mb-1">{step.title}</h3>
+                      <p className="text-sm text-slate-600 leading-relaxed font-medium">{step.desc}</p>
+                    </div>
+                    {/* Step Number Badge */}
+                    <div className="absolute -top-3 -left-3 w-8 h-8 rounded-full bg-white border-2 border-emerald-500 text-emerald-600 flex items-center justify-center text-xs font-black shadow-sm">
+                      {i === 2 ? 4 : i === 3 ? 3 : i + 1}
+                    </div>
+                  </div>
+
+                  {/* Mobile Arrow */}
+                  {i < howItWorks.length - 1 && (
+                    <div className="md:hidden flex justify-center py-4">
+                      <ArrowDown size={20} className="text-slate-300" />
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-16 flex justify-center animate-slide-up" style={{ animationDelay: '0.8s' }}>
             <button
               id="btn-mulai-deteksi-bottom"
               onClick={() => navigate('/deteksi')}
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl font-bold text-emerald-700 bg-white transition-all duration-200 hover:shadow-lg hover:-translate-y-1"
-              style={{ fontSize: 16 }}
+              className="btn-neon px-12 py-5 text-lg"
             >
-              <Sparkles size={20} />
-              Mulai Deteksi Gratis
-              <ArrowRight size={18} />
+              <Sparkles size={22} />
+              Coba Sekarang
+              <ArrowRight size={20} />
             </button>
           </div>
         </div>

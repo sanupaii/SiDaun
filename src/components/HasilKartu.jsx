@@ -126,8 +126,8 @@ function HasilKartu({ hasil }) {
               </span>
             </div>
             <p
-              className="text-xs mt-1"
-              style={{ color: '#6b7280' }}
+              className="text-xs mt-1 font-bold"
+              style={{ color: '#4b5563' }}
             >
               Tingkat keyakinan model
             </p>
@@ -146,9 +146,9 @@ function HasilKartu({ hasil }) {
             >
               <Icon size={13} color="#6366f1" />
             </div>
-            <h3 className="text-sm font-semibold text-gray-700">Penyebab</h3>
+            <h3 className="text-sm font-black text-gray-900">Penyebab</h3>
           </div>
-          <p className="text-sm text-gray-600 leading-relaxed pl-8">
+          <p className="text-sm text-gray-800 leading-relaxed pl-8 font-medium">
             {penyebab}
           </p>
         </div>
@@ -165,9 +165,9 @@ function HasilKartu({ hasil }) {
             >
               <ChevronRight size={13} color={isSehat ? '#16a34a' : '#dc2626'} />
             </div>
-            <h3 className="text-sm font-semibold text-gray-700">Penanganan</h3>
+            <h3 className="text-sm font-black text-gray-900">Penanganan</h3>
           </div>
-          <p className="text-sm text-gray-600 leading-relaxed pl-8">
+          <p className="text-sm text-gray-800 leading-relaxed pl-8 font-medium">
             {penanganan}
           </p>
         </div>
@@ -178,7 +178,7 @@ function HasilKartu({ hasil }) {
           style={{ opacity: 0.55 }}
         >
           <Leaf size={11} color="#16a34a" />
-          <span className="text-xs text-gray-500">
+          <span className="text-xs text-slate-700 font-bold">
             Otomatis tersimpan ke riwayat
           </span>
         </div>

@@ -24,28 +24,46 @@ function Navbar() {
           DESKTOP — Sticky Glassmorphism Top Navbar
           Tampil pada lebar layar md (≥768px) ke atas
           ══════════════════════════════════════════ */}
-      <header className="hidden md:block sticky top-0 z-50 w-full glass-nav">
-        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <header className="sticky top-0 z-50 w-full glass-nav">
+        <div className="max-w-6xl mx-auto px-4 md:px-6 h-16 flex items-center justify-between">
 
-          {/* Logo */}
-          <NavLink
-            to="/"
-            className="flex items-center gap-2 group"
-          >
-            <div
-              className="w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-200 group-hover:scale-105"
-              style={{ background: 'linear-gradient(135deg, #10b981, #059669)' }}
+          {/* Brand & Region Section */}
+          <div className="flex items-center gap-4">
+            <NavLink
+              to="/"
+              className="flex items-center gap-2 group"
             >
-              <Leaf size={18} color="white" strokeWidth={2.5} />
-            </div>
-            <div className="flex flex-col leading-none">
-              <span className="font-black text-lg text-slate-900 tracking-tight">SiDaun</span>
-              <span className="text-[9px] text-slate-400 font-medium tracking-widest uppercase">Deteksi Penyakit Cabai</span>
-            </div>
-          </NavLink>
+              <div
+                className="w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-200 group-hover:scale-105"
+                style={{ background: 'linear-gradient(135deg, #10b981, #059669)' }}
+              >
+                <Leaf size={18} color="white" strokeWidth={2.5} />
+              </div>
+              <div className="flex flex-col leading-none">
+                <span className="font-black text-lg text-slate-900 tracking-tight">SiDaun</span>
+                {/* <span className="text-[9px] text-slate-400 font-medium tracking-widest uppercase">Deteksi Penyakit Cabai</span> */}
+              </div>
+            </NavLink>
 
-          {/* Navigation Links */}
-          <nav className="flex items-center gap-1">
+            {/* Vertical Divider */}
+            <div className="w-[1.5px] h-8 bg-slate-300/80 rounded-full" />
+
+            {/* Region Brand (Tanah Karo) */}
+            <div className="flex items-center gap-2">
+              <img
+                src="/icons/karo.png"
+                alt="Logo Kabupaten Karo"
+                className="w-7 h-auto object-contain drop-shadow-sm"
+              />
+              <div className="flex flex-col leading-[1.1]">
+                <span className="text-[10px] font-black text-slate-600 uppercase tracking-widest">Kabupaten</span>
+                <span className="text-sm font-black text-slate-900 tracking-tight">Karo</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Navigation Links - Hidden on mobile, visible on desktop */}
+          <nav className="hidden md:flex items-center gap-1">
             {navItems.map(({ to, label, Icon }) => {
               const isActive = to === '/'
                 ? location.pathname === '/'
@@ -60,7 +78,7 @@ function Navbar() {
                     transition-all duration-200
                     ${isActive
                       ? 'text-emerald-700'
-                      : 'text-slate-500 hover:text-slate-800 hover:bg-slate-100/70'
+                      : 'text-slate-700 hover:text-slate-900 hover:bg-slate-100/80'
                     }
                   `}
                   style={isActive ? {

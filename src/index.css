@@ -183,12 +183,7 @@ html {
 
 body {
   font-family: 'Inter', system-ui, sans-serif;
-  /* Background gambar utama dari folder public */
-  background-color: #0d2218;
-  background-image: url('/bg.jpg');
-  background-size: cover;
-  background-position: center top;
-  background-attachment: fixed;
+  background-color: #ffffff;
   color: #0f172a;
   min-height: 100vh;
   overflow-x: hidden;
@@ -263,24 +258,25 @@ body {
 
 /* ---- Glass Morphism Card ---- */
 .glass-card {
-  background: rgba(255, 255, 255, 0.75);
+  background: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.8);
   box-shadow:
-    0 4px 24px rgba(16, 185, 129, 0.06),
+    0 4px 24px rgba(16, 185, 129, 0.08),
     0 1px 4px rgba(0, 0, 0, 0.05),
-    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.03);
 }
 
 /* ---- Optimized Performance Container (Fix Janky Scrolling) ---- */
 .container-hijau-pekat {
-  background-color: #f0fdf4;
+  background-color: rgba(240, 253, 244, 0.95);
   /* Warna solid bawaan Tailwind Emerald 50 (ringan) */
-  border: 1px solid rgba(16, 185, 129, 0.15);
+  border: 1.5px solid rgba(16, 185, 129, 0.25);
   border-radius: 16px;
   /* Radius lebih sederhana dari ekstrem */
-  box-shadow: 0 1px 3px rgba(16, 185, 129, 0.05);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.08);
   /* Tunda efek shadow tebal */
 
   /* Akselerasi Perangkat Keras GPU */
@@ -293,19 +289,19 @@ body {
 
 /* ---- Glass Navigation ---- */
 .glass-nav {
-  background: rgba(255, 255, 255, 0.82);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
-  box-shadow: 0 1px 24px rgba(0, 0, 0, 0.06);
-}
-
-.glass-nav-bottom {
   background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border-top: 1px solid rgba(255, 255, 255, 0.6);
-  box-shadow: 0 -4px 32px rgba(0, 0, 0, 0.06);
+  border-bottom: 1.5px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.12);
+}
+
+.glass-nav-bottom {
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1.5px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 -8px 40px rgba(0, 0, 0, 0.12);
 }
 
 /* ---- Green Gradient Button ---- */
@@ -423,100 +419,41 @@ body {
    menciptakan efek cahaya lembut berwarna yang organik.
    ──────────────────────────────────────────────────────────────── */
 .mesh-gradient-bg {
-  /* Overlay frosted semi-transparan di atas bg.jpg (dari body)
-     Mempertahankan keterbacaan teks gelap & warna neon emerald yang sudah ada */
-  background-color: transparent;
+  /* Mesh gradient di atas background putih */
+  background-color: #ffffff;
   background-image:
-    /* Lapisan putih-hijau tipis agar teks dark tetap terbaca di atas foto */
-    linear-gradient(to bottom, rgba(240, 253, 244, 0.82) 0%, rgba(236, 253, 245, 0.78) 100%),
     /* Blob hijau emerald — kanan atas */
-    radial-gradient(ellipse 70% 55% at 85% 10%, rgba(52, 211, 153, 0.30) 0%, transparent 60%),
+    radial-gradient(ellipse 70% 55% at 85% 10%, rgba(52, 211, 153, 0.15) 0%, transparent 60%),
     /* Blob hijau gelap — kiri bawah */
-    radial-gradient(ellipse 60% 50% at 10% 90%, rgba(16, 185, 129, 0.25) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 10% 90%, rgba(16, 185, 129, 0.12) 0%, transparent 60%),
     /* Blob biru langit — kiri atas */
-    radial-gradient(ellipse 55% 45% at 5% 15%, rgba(125, 211, 252, 0.15) 0%, transparent 55%),
+    radial-gradient(ellipse 55% 45% at 5% 15%, rgba(125, 211, 252, 0.08) 0%, transparent 55%),
     /* Blob indigo — kanan bawah */
-    radial-gradient(ellipse 50% 40% at 90% 85%, rgba(165, 180, 252, 0.12) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 40% at 90% 85%, rgba(165, 180, 252, 0.05) 0%, transparent 55%),
     /* Blob kuning hangat — tengah */
-    radial-gradient(ellipse 45% 35% at 50% 55%, rgba(250, 240, 137, 0.08) 0%, transparent 50%);
+    radial-gradient(ellipse 45% 35% at 50% 55%, rgba(250, 240, 137, 0.04) 0%, transparent 50%);
   min-height: 100vh;
 }
 
-/* Hero page: overlay neon di atas bg.jpg */
-.hero-gradient {
-  background-color: transparent;
-  background-image:
-    radial-gradient(ellipse 80% 55% at 50% -5%, rgba(52, 211, 153, 0.35) 0%, transparent 65%),
-    radial-gradient(ellipse 60% 45% at 85% 30%, rgba(125, 211, 252, 0.18) 0%, transparent 55%),
-    radial-gradient(ellipse 55% 40% at 10% 70%, rgba(16, 185, 129, 0.22) 0%, transparent 55%),
-    radial-gradient(ellipse 40% 35% at 80% 90%, rgba(165, 180, 252, 0.12) 0%, transparent 50%);
-}
-
-/* =========================================
-   Falling Leaves Effect (Pure CSS)
-   ========================================= */
-.falling-leaves-container {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  overflow: hidden;
-}
-
-.falling-leaf-wrapper {
-  position: absolute;
-  top: -15%;
-  will-change: transform, top;
-  animation-name: leaf-fall;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-}
-
-.leaf-img {
-  width: 150px;
-  height: 150px;
-  background-size: contain;
-  background-repeat: no-repeat;
+/* ── Hero Landing with Image Reference ── */
+.hero-landing-bg {
+  position: relative;
+  background-image: 
+    linear-gradient(rgba(15, 23, 42, 0.45) 0%, rgba(15, 23, 42, 0.7) 100%),
+    url('/karo2.jpg');
+  background-size: cover;
   background-position: center;
-  will-change: transform;
-  animation-name: leaf-sway;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-  /* animation-direction diatur dari inline styles di React */
+  background-attachment: scroll; /* Scroll normal di landing hero */
+  color: #ffffff;
 }
 
-/* Background image binding berdasarkan props LeafId */
-.leaf-type-1 {
-  background-image: url('/icons/daun1.png');
-}
-
-.leaf-type-2 {
-  background-image: url('/icons/daun2.png');
-}
-
-.leaf-type-3 {
-  background-image: url('/icons/daun3.png');
-}
-
-@keyframes leaf-fall {
-  0% {
-    top: -15%;
-    transform: translateX(0);
-  }
-
-  100% {
-    top: 110%;
-    transform: translateX(80px);
-    /* Efek terhembus angin ringan */
-  }
-}
-
-@keyframes leaf-sway {
-  0% {
-    transform: rotate(0deg) translateX(0px);
-  }
-
-  100% {
-    transform: rotate(240deg) translateX(30px);
-  }
+.hero-landing-bg::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  background: linear-gradient(to bottom, transparent, #ffffff);
+  pointer-events: none;
 }

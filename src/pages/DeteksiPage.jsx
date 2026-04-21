@@ -127,7 +127,7 @@ function DeteksiPage({ modelReady }) {
             <h1 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight">
               Deteksi Penyakit
             </h1>
-            <p className="text-sm text-slate-500">Analisis daun cabai menggunakan AI</p>
+            <p className="text-sm text-slate-700 font-medium">Analisis daun cabai menggunakan AI</p>
           </div>
         </div>
       </div>
@@ -230,8 +230,8 @@ function DeteksiPage({ modelReady }) {
                 >
                   <Leaf size={32} color="#10b981" strokeWidth={1.5} />
                 </div>
-                <p className="text-sm font-semibold text-slate-600">Pilih Gambar Daun Cabai</p>
-                <p className="text-xs text-slate-400 mt-1">Gunakan kamera atau pilih dari galeri</p>
+                <p className="text-sm font-bold text-slate-700">Pilih Gambar Daun Cabai</p>
+                <p className="text-xs text-slate-600 mt-1 font-medium">Gunakan kamera atau pilih dari galeri</p>
               </div>
             )}
 
@@ -295,12 +295,12 @@ function DeteksiPage({ modelReady }) {
                 <Sparkles size={20} color="#10b981" />
               </div>
               <div>
-                <h2 className="text-base font-bold text-slate-800">Analisis AI</h2>
-                <p className="text-xs text-slate-500">Tekan tombol untuk memulai</p>
+                <h2 className="text-base font-bold text-slate-900">Analisis AI</h2>
+                <p className="text-xs text-slate-600 font-medium">Tekan tombol untuk memulai</p>
               </div>
             </div>
 
-            <p className="text-sm text-slate-500 mb-5 leading-relaxed">
+            <p className="text-sm text-slate-700 mb-5 leading-relaxed font-medium">
               Unggah gambar daun cabai, lalu klik tombol di bawah untuk mendeteksi jenis penyakitnya secara otomatis.
             </p>
 
@@ -356,8 +356,8 @@ function DeteksiPage({ modelReady }) {
                 <Brain size={32} color="#10b981" />
               </div>
               <div className="text-center">
-                <p className="text-sm font-semibold text-slate-700">Menganalisis gambar…</p>
-                <p className="text-xs text-slate-400 mt-1">Model AI sedang memproses</p>
+                <p className="text-sm font-bold text-slate-800">Menganalisis gambar…</p>
+                <p className="text-xs text-slate-600 mt-1 font-medium">Model AI sedang memproses</p>
               </div>
             </div>
           )}
