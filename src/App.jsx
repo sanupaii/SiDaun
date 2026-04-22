@@ -22,6 +22,7 @@ import AboutPage from './pages/AboutPage'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import ScrollToTop from './components/ScrollToTop'
+import MeshBackground from './components/MeshBackground'
 
 
 
@@ -84,10 +85,11 @@ function App() {
     <ModelContext.Provider value={{ modelReady }}>
       <div className="min-h-screen mesh-gradient-bg flex flex-col font-sans text-slate-900 selection:bg-emerald-100 selection:text-emerald-900 relative overflow-x-hidden">
         {/* ── Background Effects ── */}
+        <MeshBackground />
 
-        
+
         <ScrollToTop />
-        
+
         {/* ── Banner Install PWA ── */}
         {installPrompt && (
           <div className="fixed top-0 left-0 w-full z-[100] p-3 bg-emerald-600 text-white flex justify-center items-center gap-4 shadow-xl backdrop-blur-md bg-opacity-90 animate-slide-down">
@@ -102,7 +104,7 @@ function App() {
             >
               INSTALL
             </button>
-            <button 
+            <button
               onClick={() => setInstallPrompt(null)}
               className="opacity-70 hover:opacity-100 text-xs font-bold"
             >

@@ -169,6 +169,18 @@
   }
 }
 
+@keyframes mesh-float {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 40px) scale(0.9);
+  }
+}
+
 /* ---- Base Reset & Global ---- */
 *,
 *::before,
@@ -256,6 +268,10 @@ body {
   animation: blob 8s ease-in-out infinite;
 }
 
+.animate-mesh {
+  animation: mesh-float 15s ease-in-out infinite;
+}
+
 /* ---- Glass Morphism Card ---- */
 .glass-card {
   background: rgba(255, 255, 255, 0.88);
@@ -294,7 +310,8 @@ body {
 
 /* Desktop Top Navbar */
 .glass-nav {
-  background: #ffffff; /* Solid white on mobile */
+  background: #ffffff;
+  /* Solid white on mobile */
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
@@ -310,7 +327,8 @@ body {
 
 /* Mobile Bottom Navbar (Android style) */
 .glass-nav-bottom {
-  background: #ffffff; /* Solid white on mobile */
+  background: #ffffff;
+  /* Solid white on mobile */
   border-top: 1px solid rgba(0, 0, 0, 0.05);
   box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05);
 }
@@ -439,19 +457,7 @@ body {
    menciptakan efek cahaya lembut berwarna yang organik.
    ──────────────────────────────────────────────────────────────── */
 .mesh-gradient-bg {
-  /* Mesh gradient di atas background putih */
-  background-color: #ffffff;
-  background-image:
-    /* Blob hijau emerald — kanan atas */
-    radial-gradient(ellipse 70% 55% at 85% 10%, rgba(52, 211, 153, 0.15) 0%, transparent 60%),
-    /* Blob hijau gelap — kiri bawah */
-    radial-gradient(ellipse 60% 50% at 10% 90%, rgba(16, 185, 129, 0.12) 0%, transparent 60%),
-    /* Blob biru langit — kiri atas */
-    radial-gradient(ellipse 55% 45% at 5% 15%, rgba(125, 211, 252, 0.08) 0%, transparent 55%),
-    /* Blob indigo — kanan bawah */
-    radial-gradient(ellipse 50% 40% at 90% 85%, rgba(165, 180, 252, 0.05) 0%, transparent 55%),
-    /* Blob kuning hangat — tengah */
-    radial-gradient(ellipse 45% 35% at 50% 55%, rgba(250, 240, 137, 0.04) 0%, transparent 50%);
+  background-color: transparent;
   min-height: 100vh;
 }
 
@@ -533,13 +539,15 @@ body {
    PREMIUM DARK SECTION & CARDS (Reference: Monografi Hukum style)
    ──────────────────────────────────────────────────────────────── */
 .section-dark-emerald-1 {
-  background-color: #011f13; /* Deepest Green from Image 1 */
+  background-color: #011f13;
+  /* Deepest Green from Image 1 */
   color: #ffffff;
   position: relative;
 }
 
 .section-dark-emerald-2 {
-  background-color: #064e3b; /* Mid Deep Green from Image 2 */
+  background-color: #064e3b;
+  /* Mid Deep Green from Image 2 */
   color: #ffffff;
   position: relative;
 }
@@ -555,16 +563,18 @@ body {
   font-weight: 800;
   color: #ffffff;
   display: inline-block;
-  border-bottom: 3.5px solid #10b981; /* Emerald underline */
+  border-bottom: 3.5px solid #10b981;
+  /* Emerald underline */
   padding-bottom: 8px;
   margin-bottom: 1.5rem;
   letter-spacing: -0.02em;
 }
 
 .card-premium-dark {
-  background: rgba(6, 78, 59, 0.4); /* Deep emerald overlay */
+  background: rgba(6, 78, 59, 0.4);
+  /* Deep emerald overlay */
   backdrop-filter: blur(10px);
-  border-top: 4px solid #10b981; 
+  border-top: 4px solid #10b981;
   border-radius: 20px;
   padding: 2.5rem 1.5rem;
   display: flex;
